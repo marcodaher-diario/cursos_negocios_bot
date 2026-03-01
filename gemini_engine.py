@@ -13,39 +13,39 @@ class GeminiEngine:
     def gerar_analise_jornalistica(self, titulo, resumo, categoria):
 
         prompt = f"""
-Atue como um Jornalista Sênior com 20 anos de experiência em hard news e reportagem investigativa.
+Atue como um Estrategista de Negócios Digitais e Especialista em Marketing com 20 anos de experiência em Infoprodutos e Empreendedorismo.
 
-Seu objetivo: Redigir um artigo jornalístico de fôlego baseado nas informações que fornecerei abaixo. O texto deve seguir rigorosamente os padrões de qualidade de veículos como The New York Times ou BBC.
+Seu objetivo: Redigir um artigo educativo e estratégico baseado nas informações que fornecerei abaixo. O texto deve seguir padrões de qualidade de portais como Harvard Business Review ou Forbes, com foco em autoridade e confiança.
 
 Informações base:
 
-Título da notícia: {titulo}
+Título da notícia/tema: {titulo}
 
-Resumo da notícia: {resumo}
+Resumo da notícia/tema: {resumo}
 
 Categoria: {categoria}
 
 Diretrizes Obrigatórias:
 
-Tom e Estilo: Imparcial, técnico e analítico. Use linguagem clara, objetiva e evite adjetivos desnecessários ou termos sensacionalistas.
+Tom e Estilo: Profissional, educativo e persuasivo (conversão moderada). Use linguagem clara, que demonstre autoridade no nicho de negócios, evitando promessas de ganho fácil.
 
-Extensão: Entre 700 palavras no mínimo e 900 palavras no máximo. Desenvolva os parágrafos com profundidade.
+Extensão: Entre 700 palavras no mínimo e 900 palavras no máximo. Desenvolva os parágrafos com profundidade e insights acionáveis.
 
-Originalidade: O texto deve ser inédito, processando as informações e reescrevendo-as com uma narrativa própria (sem plágio).
+Originalidade: O texto deve ser inédito, processando as informações e transformando notícias em guias, análises de mercado ou oportunidades de aprendizado.
 
-Isenção: Proibido emitir opinião pessoal ou usar primeira pessoa. Se houver controvérsias, apresente os dois lados de forma equilibrada.
+Foco: Priorizar o valor para o leitor, explicando como ele pode aplicar aquela informação em sua carreira, curso ou negócio digital (Kiwify, Hotmart, etc).
 
 Estrutura do Texto:
 
-Título: Chamativo, porém informativo e sóbrio.
+Título: Estratégico, focado em benefício ou análise de mercado (atraente para empreendedores).
 
-Lide (Lead): O primeiro parágrafo deve responder: Quem? O quê? Onde? Quando? Por quê? e Como?
+Lide (Lead): O primeiro parágrafo deve situar o leitor sobre a oportunidade ou mudança no mercado, conectando o fato à realidade dos negócios digitais.
 
-Subtítulos: Utilize pelo menos dois subtítulos para organizar a progressão temática do texto.
+Subtítulos: Utilize pelo menos dois subtítulos para organizar o conteúdo (ex: "Impactos no Mercado" e "Passos Práticos" ou "Análise da Oportunidade").
 
-Corpo: Desenvolva os fatos de forma cronológica ou por relevância de impacto.
+Corpo: Desenvolva os fatos com um viés consultivo. Explique o "porquê" por trás dos dados e como isso afeta produtores, afiliados ou estudantes.
 
-Conclusão Analítica: Encerre com uma análise técnica sobre as implicações futuras ou o desdobramento esperado dos fatos, sem cair no opinativo subjetivo.
+Conclusão Analítica: Encerre com uma visão estratégica sobre o futuro dessa tendência e um incentivo à profissionalização e estudo contínuo.
 
 Importante:
 - Não escreva explicações externas.
@@ -66,12 +66,15 @@ Importante:
         com base no contexto da notícia.
         """
         prompt = f"""
-Com base no título e resumo da notícia abaixo, gere APENAS uma sequência de 3 a 4 palavras-chave 
-em INGLÊS que descrevam uma imagem fotográfica ideal para ilustrar esta matéria em um blog de notícias.
+Com base no título e resumo abaixo, gere APENAS uma sequência de 3 a 4 palavras-chave 
+em INGLÊS que descrevam uma imagem fotográfica de alta qualidade (estilo editorial/business) 
+ideal para ilustrar esta matéria em um blog de negócios e cursos.
 
 Diretrizes:
-- Use apenas substantivos e adjetivos visuais.
-- Foque no cenário, objetos ou clima da notícia (ex: "police lights night", "stock market glow", "city explosion smoke").
+- Aspect Ratio: 16:9 (obrigatório).
+- Estética: Profissional, moderna, clean e corporativa.
+- Foque em elementos visuais: (ex: "laptop workspace coffee", "digital marketing analytics", "entrepreneur thinking office", "online education student").
+- Use apenas substantivos e adjetivos visuais em INGLÊS.
 - Não use verbos ou frases completas.
 - Retorne APENAS as palavras em inglês, sem pontuação extra.
 
