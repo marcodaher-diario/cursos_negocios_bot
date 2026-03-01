@@ -27,11 +27,27 @@ from imagem_engine import ImageEngine
 # CONFIGURAÇÃO DO NOVO NICHO
 # ==========================================================
 
+# Mapeamento: (Dia_da_Semana, "HH:MM") -> Tema
+# 0:Seg, 1:Ter, 2:Qua, 3:Qui, 4:Sex, 5:Sab, 6:Dom
 AGENDA_POSTAGENS = {
-    "11:00": "cursos",
-    "15:00": "negocios",
-    "20:00": "oportunidades"
+    (1, "15:00"): "cursos",       # Terça
+    (3, "15:00"): "cursos",       # Quinta
+    (5, "15:00"): "cursos",       # Sábado
+    
+    (0, "15:00"): "negocios",     # Segunda
+    (2, "15:00"): "negocios",     # Quarta
+    (4, "15:00"): "negocios",     # Sexta
+    
+    (0, "17:00"): "oportunidades", # Segunda
+    (3, "17:00"): "oportunidades", # Quinta
+    (6, "17:00"): "oportunidades", # Domingo
 }
+
+def obter_tema_atual():
+    agora = obter_horario_brasilia() # Melhor usar sua função de Brasília já pronta
+    dia_semana = agora.weekday()
+    hora_formatada = agora.strftime("%H:00")
+    return AGENDA_POSTAGENS.get((dia_semana, hora_formatada), "tema_padrao")
 
 JANELA_MINUTOS = 60
 ARQUIVO_CONTROLE_DIARIO = "controle_diario.txt"
@@ -287,20 +303,22 @@ if __name__ == "__main__":
         exit()
 
     agora = obter_horario_brasilia()
+    dia_atual = agora.weekday() # Pegamos o dia da semana (0-6)
     min_atual = agora.hour * 60 + agora.minute
     data_hoje = agora.strftime("%Y-%m-%d")
 
     horario_escolhido = None
     tema_escolhido = None
 
-    for horario_agenda, tema in AGENDA_POSTAGENS.items():
-        min_agenda = horario_para_minutos(horario_agenda)
-        if dentro_da_janela(min_atual, min_agenda):
-            if not ja_postou(data_hoje, horario_agenda):
-                horario_escolhido = horario_agenda
-                tema_escolhido = tema
-                break
-
+    # Ajustado para desempacotar a tupla ((dia, hora), tema)
+    for (dia_agenda, hora_string), tema in AGENDA_POSTAGENS.items():
+        if dia_agenda == dia_atual: # Só verifica se for o dia correto
+            min_agenda = horario_para_minutos(hora_string)
+            if dentro_da_janela(min_atual, min_agenda):
+                if not ja_postou(data_hoje, hora_string):
+                    horario_escolhido = hora_string
+                    tema_escolhido = tema
+                    break
     if not horario_escolhido:
         exit()
 
