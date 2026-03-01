@@ -2,7 +2,7 @@
 # CONFIGURAÇÕES GERAIS DO BLOG
 # ==========================================
 
-BLOG_ID = "7605688984374445860"
+BLOG_ID = "4291876780757321771"
 
 RSS_FEEDS = [
     "https://g1.globo.com/rss/g1/",
