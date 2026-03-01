@@ -2,9 +2,9 @@ name: Bot Cursos e Negocios
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # 09:00 Brasil
-    - cron: '0 16 * * *'  # 13:00 Brasil
-    - cron: '0 22 * * *'  # 19:00 Brasil
+    - cron: '0 14 * * *'  # 11:00 Brasil
+    - cron: '0 18 * * *'  # 15:00 Brasil
+    - cron: '0 23 * * *'  # 20:00 Brasil
 
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ on:
         required: false
         default: "false"
       test_tema:
-        description: "Tema para teste (policial, politica, economia)"
+        description: "Tema para teste (cursos, negocios, oportunidades)"
         required: false
         default: "policial"
       test_publicar:
@@ -48,7 +48,7 @@ jobs:
       - name: Criar token.json a partir do Secret
         run: echo "${{ secrets.BLOGGER_TOKEN_BASE64 }}" | base64 --decode > token.json
 
-      - name: Rodar Bot de Noticias
+      - name: Rodar Bot Cursos e Negocios
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
