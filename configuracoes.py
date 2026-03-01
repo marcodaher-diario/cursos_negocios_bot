@@ -2,53 +2,50 @@
 # CONFIGURAÇÕES GERAIS DO BLOG
 # ==========================================
 
-BLOG_ID = "4291876780757321771"
+# Lembre-se de atualizar o BLOG_ID caso este seja um novo blog no Blogger
+BLOG_ID = "4291876780757321771" 
 
 RSS_FEEDS = [
-    "https://g1.globo.com/rss/g1/",
-    "https://feeds.uol.com.br/home.xml",
-    "https://rss.uol.com.br/feed/noticias.xml",
-    "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml",
-    "https://agenciabrasil.ebc.com.br/rss",
-    "https://feeds.bbci.co.uk/portuguese/rss.xml",
-    "https://www.gazetadopovo.com.br/feed/rss/brasil.xml",
-    "https://reporterbrasil.org.br/feed/",
-    "https://www.cnnbrasil.com.br/feed/",
-    "https://www.estadao.com.br/arc/outboundfeeds/rss/category/brasil/",
-    "https://g1.globo.com/rss/g1/economia/",
-    "https://www.camara.leg.br/noticias/rss/ultimas-noticias",
-    "https://www.camara.leg.br/noticias/rss/dinamico/POLITICA",
-    "https://www12.senado.leg.br/noticias/ultimas",
-    "https://news.google.com/rss/search?q=site:metropoles.com+intitle:política&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+    "https://exame.com/pme/feed/",
+    "https://revistapegn.globo.com/rss/pme/",
+    "https://www.infomoney.com.br/carreira/feed/",
+    "https://neofeed.com.br/feed/",
+    "https://ecommercenews.com.br/feed/",
+    "https://resultadosdigitais.com.br/blog/feed/",
+    "https://rockcontent.com/br/blog/feed/",
+    "https://www.ecommercebrasil.com.br/feed/",
+    "https://blog.hotmart.com/pt-br/feed/",
+    "https://viverdeblog.com/feed/",
+    "https://news.google.com/rss/search?q=intitle:empreendedorismo+OR+intitle:marketing+digital&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+    "https://news.google.com/rss/search?q=renda+extra+confiável+OR+trabalho+remoto&hl=pt-BR&gl=BR&ceid=BR:pt-419"
 ]
 
 # ==========================================
-# TEMAS PARA POSTAGEM
+# TEMAS PARA POSTAGEM CURSOS E NEGÓCIOS
 # ==========================================
 
-PALAVRAS_POLICIAL = [
-    "polícia", "crime", "prisão", "assalto", "homicídio", "tráfico", "investigação", 
-    "corrupção", "suspeito", "acusado", "operação", "flagrante", "violência", "mandado", 
-    "força-tarefa", "custódia", "preventiva", "busca", "inquérito", "sentença", "quadrilha", 
-    "lavagem", "facção", "sigilosa", "confronto", "latrocínio", "feminicídio", "cárcere", 
-    "arsenal", "golpe", "fraude", "perícia", "cibernético", "plantão", "foragido", 
-    "intervenção", "ocorrência"
+# Foco em Cursos, E-books e Capacitação
+PALAVRAS_CURSOS_E_CONTEUDO = [
+    "curso", "treinamento", "capacitação", "e-book", "infoproduto", "mentoria", 
+    "workshop", "webinar", "aprendizado", "especialização", "aula", "gratuito", 
+    "certificado", "formação", "estudo", "plataforma", "didática", "educativo", 
+    "conhecimento", "habilidades", "venda de e-books", "produtor de conteúdo"
 ]
 
-PALAVRAS_POLITICA = [
-    "CPI", "CPMI", "política", "governo", "presidente", "congresso", "senado", "stf", "eleição", "ministro", 
-    "deputado", "senador", "planalto", "judiciário", "Congresso", "Planalto", "Senado", "Oposição", 
-    "Votação", "Plenário", "Constituição", "Decreto", "Reforma", "Parlamentar", "Inquérito", "Eitoral", 
-    "Supremo", "STF", "Impeachment", "Cassação", "Orçamento", "Transparência", "Diplomacia", 
-    "Articulação", "Coligação", "Mandato", "Legislação", "Democracia", "Governabilidade"
+# Foco em Negócios Digitais, Afiliados e Plataformas
+PALAVRAS_NEGOCIOS_DIGITAIS = [
+    "Kiwify", "Hotmart", "Eduzz", "Monetizze", "afiliado", "marketing digital", 
+    "vendas online", "conversão", "copywriting", "tráfego pago", "tráfego orgânico", 
+    "lançamento", "funil de vendas", "estratégia", "autoridade", "branding", 
+    "Instagram", "Facebook", "TikTok", "anúncios", "gestão de tráfego", "ROI"
 ]
 
-PALAVRAS_ECONOMIA = [
-    "economia", "pib", "dólar", "inflação", "selic", "mercado", "banco", "investimento", 
-    "financeiro", "bolsa", "consumo", "ibovespa", "cotação", "ipca", "juros", "recessão", 
-    "desemprego", "tributária", "impostos", "orçamento", "déficit", "superávit", "fiscal", 
-    "monetária", "crédito", "agronegócio", "exportação", "investimentos", "criptomoedas", 
-    "varejo", "combustíveis"
+# Foco em Empreendedorismo, Renda Extra e Oportunidades
+PALAVRAS_OPORTUNIDADES_E_RENDA = [
+    "empreendedorismo", "negócios em alta", "renda extra", "oportunidade", 
+    "investimento", "carreira", "trabalho remoto", "home office", "franquia", 
+    "MEI", "lucro", "escalabilidade", "monetização", "renda passiva", 
+    "finanças", "pme", "inovação", "startup", "mercado", "tendência"
 ]
 
 # ==========================================
