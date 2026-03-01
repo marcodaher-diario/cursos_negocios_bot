@@ -18,9 +18,9 @@ on:
         required: false
         default: "false"
       test_tema:
-        description: "Tema para teste (policial, politica, economia)"
+        description: "Tema para teste (cursos, negocios, oportunidades)"
         required: false
-        default: "policial"
+        default: "cursos"
       test_publicar:
         description: "Publicar ao vivo? (true ou false)"
         required: false
