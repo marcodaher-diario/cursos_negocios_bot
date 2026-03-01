@@ -8,12 +8,13 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from email.utils import parsedate_to_datetime
 
+# Importando os novos nomes de variáveis do seu configuracoes.py atualizado
 from configuracoes import (
     BLOG_ID,
     RSS_FEEDS,
-    PALAVRAS_POLICIAL,
-    PALAVRAS_POLITICA,
-    PALAVRAS_ECONOMIA,
+    PALAVRAS_CURSOS_E_CONTEUDO,   # Antiga Policial
+    PALAVRAS_NEGOCIOS_DIGITAIS,   # Antiga Politica
+    PALAVRAS_OPORTUNIDADES_E_RENDA, # Antiga Economia
     BLOCO_FIXO_FINAL
 )
 
@@ -23,13 +24,13 @@ from imagem_engine import ImageEngine
 
 
 # ==========================================================
-# CONFIGURAÇÃO
+# CONFIGURAÇÃO DO NOVO NICHO
 # ==========================================================
 
 AGENDA_POSTAGENS = {
-    "09:00": "policial",
-    "13:00": "economia",
-    "19:00": "politica"
+    "09:00": "cursos",
+    "13:00": "negocios",
+    "19:00": "oportunidades"
 }
 
 JANELA_MINUTOS = 60
@@ -38,24 +39,36 @@ ARQUIVO_POSTS_PUBLICADOS = "posts_publicados.txt"
 
 
 # ==========================================================
-# UTILIDADES DE TEMPO
+# UTILIDADES E LIMPEZA (NOVA FUNÇÃO ADICIONADA AQUI)
 # ==========================================================
 
 def obter_horario_brasilia():
     return datetime.utcnow() - timedelta(hours=3)
 
+def limpar_e_filtrar_conteudo(texto_bruto):
+    """Limpa ruídos de feeds externos para manter autoridade."""
+    termos_sujos = [
+        r"Leia também:.*", r"Confira mais no site.*",
+        r"Inscreva-se na nossa newsletter.*", r"Siga-nos nas redes sociais.*",
+        r"Assine o clipping.*", r"Conteúdo patrocinado por.*", r"Fonte:.*"
+    ]
+    texto_limpo = texto_bruto
+    for padrao in termos_sujos:
+        texto_limpo = re.sub(padrao, "", texto_limpo, flags=re.IGNORECASE)
+    # Remove links HTML de terceiros
+    texto_limpo = re.sub(r'<a href=".*?">.*?</a>', '', texto_limpo)
+    return texto_limpo.strip()
 
 def horario_para_minutos(hhmm):
     h, m = map(int, hhmm.split(":"))
     return h * 60 + m
-
 
 def dentro_da_janela(min_atual, min_agenda):
     return abs(min_atual - min_agenda) <= JANELA_MINUTOS
 
 
 # ==========================================================
-# CONTROLE DE PUBLICAÇÃO (COM RODÍZIO DE 15 LINHAS)
+# CONTROLE DE PUBLICAÇÃO E LINKS (MANTIDOS)
 # ==========================================================
 
 def ja_postou(data_str, horario_agenda):
@@ -77,35 +90,22 @@ def registrar_postagem(data_str, horario_agenda):
     if os.path.exists(ARQUIVO_CONTROLE_DIARIO):
         with open(ARQUIVO_CONTROLE_DIARIO, "r", encoding="utf-8") as f:
             linhas = f.readlines()
-
-    # Adiciona o novo registro e mantém apenas os últimos 15
     nova_linha = f"{data_str}|{horario_agenda}\n"
     if nova_linha not in linhas:
         linhas.append(nova_linha)
-    
-    linhas = linhas[-15:] # Mantém o arquivo leve (aprox. 5 dias de histórico)
-
+    linhas = linhas[-15:]
     with open(ARQUIVO_CONTROLE_DIARIO, "w", encoding="utf-8") as f:
         f.writelines(linhas)
-
-
-# ==========================================================
-# CONTROLE DE LINKS (COM RODÍZIO DE 100 LINHAS)
-# ==========================================================
 
 def registrar_link_publicado(link):
     linhas = []
     if os.path.exists(ARQUIVO_POSTS_PUBLICADOS):
         with open(ARQUIVO_POSTS_PUBLICADOS, "r", encoding="utf-8") as f:
             linhas = f.readlines()
-
-    # Adiciona o link e mantém os últimos 100 para evitar repetições recentes
     nova_linha = f"{link}\n"
     if nova_linha not in linhas:
         linhas.append(nova_linha)
-    
     linhas = linhas[-100:] 
-
     with open(ARQUIVO_POSTS_PUBLICADOS, "w", encoding="utf-8") as f:
         f.writelines(linhas)
 
@@ -117,46 +117,22 @@ def link_ja_publicado(link):
 
 
 # ==========================================================
-# CONTROLE DE IMAGENS (ADICIONAL - SE VOCÊ USAR)
-# ==========================================================
-
-def registrar_imagem_usada(url_imagem):
-    ARQUIVO_IMAGENS = "imagens_usadas.txt"
-    linhas = []
-    if os.path.exists(ARQUIVO_IMAGENS):
-        with open(ARQUIVO_IMAGENS, "r", encoding="utf-8") as f:
-            linhas = f.readlines()
-
-    nova_linha = f"{url_imagem}\n"
-    if nova_linha not in linhas:
-        linhas.append(nova_linha)
-    
-    linhas = linhas[-50:] # Mantém as últimas 50 URLs para variar o visual
-
-    with open(ARQUIVO_IMAGENS, "w", encoding="utf-8") as f:
-        f.writelines(linhas)
-
-# ==========================================================
-# VERIFICAR TEMA
+# VERIFICAR TEMA (ADAPTADO)
 # ==========================================================
 
 def verificar_assunto(titulo, texto):
     conteudo = f"{titulo} {texto}".lower()
-
-    if any(p in conteudo for p in PALAVRAS_POLICIAL):
-        return "policial"
-
-    if any(p in conteudo for p in PALAVRAS_POLITICA):
-        return "politica"
-
-    if any(p in conteudo for p in PALAVRAS_ECONOMIA):
-        return "economia"
-
+    if any(p in conteudo for p in PALAVRAS_CURSOS_E_CONTEUDO):
+        return "cursos"
+    if any(p in conteudo for p in PALAVRAS_NEGOCIOS_DIGITAIS):
+        return "negocios"
+    if any(p in conteudo for p in PALAVRAS_OPORTUNIDADES_E_RENDA):
+        return "oportunidades"
     return "geral"
 
 
 # ==========================================================
-# GERAR TAGS SEO
+# GERAR TAGS SEO (MANTIDO)
 # ==========================================================
 
 def gerar_tags_seo(titulo, texto):
@@ -167,12 +143,10 @@ def gerar_tags_seo(titulo, texto):
     for p in palavras:
         if p not in stopwords and p not in tags:
             tags.append(p.capitalize())
-
-    tags_fixas = ["Notícias", "Diário de Notícias", "Marco Daher"]
+    tags_fixas = ["Negócios", "Cursos", "Empreendedorismo"] # Tags adaptadas
     for tf in tags_fixas:
         if tf not in tags:
             tags.append(tf)
-
     resultado = []
     tamanho_atual = 0
     for tag in tags:
@@ -185,40 +159,22 @@ def gerar_tags_seo(titulo, texto):
 
 
 # ==========================================================
-# BUSCAR NOTÍCIA COM RANKING EDITORIAL (ESTRATÉGICO)
+# BUSCAR NOTÍCIA COM RANKING ESTRATÉGICO (ADAPTADO)
 # ==========================================================
 
 def buscar_noticia(tipo):
-
     pesos_por_tema = {
-        "policial": {
-            # Crimes e Operações
-            "homicídio": 12, "prisão": 10, "operação": 9, "flagrante": 9, "crime": 8,
-            # Segurança e Investigação
-            "pf": 11, "polícia": 10, "suspeito": 7, "investigação": 7, "apreensão": 8,
-            # Eventos de Impacto
-            "ataque": 12, "explosão": 12, "tiroteio": 10, "facção": 8, "tráfico": 8,
-            "morte": 9, "vítima": 8, "assalto": 7, "sequestro": 9
+        "cursos": {
+            "curso": 15, "gratuito": 12, "vagas": 10, "e-book": 12, "inscrição": 9,
+            "especialização": 10, "treinamento": 9, "mentoria": 11, "certificado": 10
         },
-
-        "politica": {
-            # Instituições de Poder
-            "stf": 12, "supremo": 12, "congresso": 10, "senado": 9, "planalto": 10,
-            # Personagens e Processos
-            "presidente": 10, "ministro": 9, "eleição": 8, "votação": 9, "câmara": 8,
-            # Geopolítica e Crises (Onde entra a "Guerra")
-            "guerra": 15, "míssil": 15, "conflito": 12, "itamaraty": 10, "diplomacia": 9,
-            "tensão": 8, "ataque": 11, "israel": 10, "irã": 10, "rússia": 10, "uae": 9
+        "negocios": {
+            "kiwify": 15, "hotmart": 15, "marketing digital": 13, "afiliado": 12,
+            "vendas": 10, "estratégia": 9, "lucro": 10, "eduzz": 12, "copywriting": 11
         },
-
-        "economia": {
-            # Indicadores de Bolso
-            "inflação": 12, "dólar": 12, "pib": 9, "selic": 10, "juros": 9,
-            # Mercado e Grandes Empresas
-            "mercado": 8, "bolsa": 9, "ibovespa": 8, "petrobras": 10, "vale": 8,
-            # Impacto no Consumo
-            "preço": 9, "combustível": 10, "gasolina": 9, "tarifas": 8, "imposto": 9,
-            "petróleo": 11, "reforma tributária": 10, "arcabouço": 9
+        "oportunidades": {
+            "renda extra": 15, "home office": 12, "trabalho remoto": 12, "mei": 10,
+            "franquia": 11, "investimento": 9, "startup": 10, "carreira": 9, "pme": 8
         }
     }
 
@@ -228,88 +184,65 @@ def buscar_noticia(tipo):
 
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
-
         for entry in feed.entries[:15]:
             titulo = entry.get("title", "")
-            resumo = entry.get("summary", "")
+            resumo_bruto = entry.get("summary", "")
             link = entry.get("link", "")
             
-            # Tenta capturar imagem do feed com segurança
+            # Limpando o resumo antes de qualquer análise
+            resumo = limpar_e_filtrar_conteudo(resumo_bruto)
+
+            if not titulo or not link: continue
+            if verificar_assunto(titulo, resumo) != tipo: continue
+            if link_ja_publicado(link): continue
+
+            # Lógica de imagem original mantida
             imagem = ""
             if "media_content" in entry and len(entry.media_content) > 0:
                 imagem = entry.media_content[0].get("url", "")
 
-            if not titulo or not link:
-                continue
-
-            if verificar_assunto(titulo, resumo) != tipo:
-                continue
-
-            if link_ja_publicado(link):
-                continue
-
+            # Validação de data original mantida
             data_publicacao = None
             if hasattr(entry, "published"):
                 try:
                     data_publicacao = parsedate_to_datetime(entry.published)
                     if data_publicacao.tzinfo is not None:
                         data_publicacao = data_publicacao.astimezone(tz=None).replace(tzinfo=None)
-                except:
-                    pass
+                except: pass
 
             if data_publicacao:
-                if (agora - data_publicacao).days > 1:
-                    continue
+                if (agora - data_publicacao).days > 1: continue
 
             conteudo = f"{titulo} {resumo}".lower()
             score = 0
-
-            # Pontuação por Palavras-Chave
             for palavra, peso in palavras_peso.items():
-                if palavra in conteudo:
-                    score += peso
+                if palavra in conteudo: score += peso
 
-            # Bônus de Recência (Prioriza o que saiu agora)
             if data_publicacao:
                 minutos_passados = (agora - data_publicacao).total_seconds() / 60
                 bonus_recencia = max(0, 1000 - minutos_passados) / 1000
                 score += bonus_recencia
 
             noticias_validas.append({
-                "titulo": titulo,
-                "texto": resumo,
-                "link": link,
-                "imagem": imagem,
-                "score": score
+                "titulo": titulo, "texto": resumo, "link": link,
+                "imagem": imagem, "score": score
             })
 
-    if not noticias_validas:
-        return None
-
-    # Seleciona a notícia com a maior pontuação editorial
+    if not noticias_validas: return None
     noticia_escolhida = max(noticias_validas, key=lambda x: x["score"])
-
-    return {
-        "titulo": noticia_escolhida["titulo"],
-        "texto": noticia_escolhida["texto"],
-        "link": noticia_escolhida["link"],
-        "imagem": noticia_escolhida["imagem"]
-    }
+    return noticia_escolhida
 
 
 # ==========================================================
-# MODO TESTE
+# MODO TESTE (ADAPTADO PARA NOVOS TEMAS)
 # ==========================================================
 
 def executar_modo_teste(tema_forcado=None, publicar=False):
-
-    print("=== MODO TESTE ATIVADO ===")
-
+    print("=== MODO TESTE ATIVADO (NICHO NEGÓCIOS) ===")
     if not tema_forcado:
-        tema_forcado = "policial"
+        tema_forcado = "cursos"
 
     noticia = buscar_noticia(tema_forcado)
-
     if not noticia:
         print("Nenhuma notícia encontrada para teste.")
         return
@@ -317,14 +250,12 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
     gemini = GeminiEngine()
     imagem_engine = ImageEngine()
 
+    # Passa o resumo já limpo para a IA
     texto_ia = gemini.gerar_analise_jornalistica(noticia["titulo"], noticia["texto"], tema_forcado)
-
-    # Busca visual inteligente no Modo Teste também
     query_visual = gemini.gerar_query_visual(noticia["titulo"], noticia["texto"])
     imagem_final = imagem_engine.obter_imagem(noticia, tema_forcado, query_ia=query_visual)
 
     tags = gerar_tags_seo(noticia["titulo"], texto_ia)
-
     dados = {
         "titulo": noticia["titulo"],
         "imagem": imagem_final,
@@ -333,31 +264,24 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
     }
 
     html = obter_esqueleto_html(dados)
-
     service = Credentials.from_authorized_user_file("token.json")
     service = build("blogger", "v3", credentials=service)
 
     service.posts().insert(
         blogId=BLOG_ID,
-        body={
-            "title": noticia["titulo"],
-            "content": html,
-            "labels": tags
-        },
+        body={"title": noticia["titulo"], "content": html, "labels": tags},
         isDraft=not publicar
     ).execute()
-
     print("Postagem de teste concluída.")
 
 
 # ==========================================================
-# EXECUÇÃO PRINCIPAL
+# EXECUÇÃO PRINCIPAL (MANTIDA COM ADAPTAÇÃO DE TEMAS)
 # ==========================================================
 
 if __name__ == "__main__":
-
     if os.getenv("TEST_MODE") == "true":
-        tema_teste = os.getenv("TEST_TEMA", "policial")
+        tema_teste = os.getenv("TEST_TEMA", "cursos")
         publicar_teste = os.getenv("TEST_PUBLICAR", "false") == "true"
         executar_modo_teste(tema_forcado=tema_teste, publicar=publicar_teste)
         exit()
@@ -388,8 +312,6 @@ if __name__ == "__main__":
     imagem_engine = ImageEngine()
 
     texto_ia = gemini.gerar_analise_jornalistica(noticia["titulo"], noticia["texto"], tema_escolhido)
-    
-    # Nova lógica de busca visual inteligente
     query_visual = gemini.gerar_query_visual(noticia["titulo"], noticia["texto"])
     imagem_final = imagem_engine.obter_imagem(noticia, tema_escolhido, query_ia=query_visual)
     
@@ -409,11 +331,7 @@ if __name__ == "__main__":
 
     service.posts().insert(
         blogId=BLOG_ID,
-        body={
-            "title": noticia["titulo"],
-            "content": html,
-            "labels": tags
-        },
+        body={"title": noticia["titulo"], "content": html, "labels": tags},
         isDraft=False
     ).execute()
 
