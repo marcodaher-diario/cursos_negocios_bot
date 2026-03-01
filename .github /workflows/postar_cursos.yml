@@ -1,4 +1,4 @@
-name: Bot Diario de Noticias
+name: Bot Cursos e Negocios
 
 on:
   schedule:
