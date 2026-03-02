@@ -12,38 +12,38 @@ class GeminiEngine:
 
     def gerar_analise_jornalistica(self, titulo, resumo, categoria):
 
-prompt = f"""
-    Atue como um Estrategista de Negócios Digitais e Especialista em Marketing Digital com 20 anos de experiência no mercado brasileiro de Infoprodutos e Empreendedorismo.
-    
-    Seu objetivo: Redigir um artigo educativo e estratégico baseado nas informações fornecidas. O texto deve seguir o padrão de autoridade da Forbes Brasil ou Exame, com foco total no cenário econômico e digital do BRASIL.
-    
-    Informações base:
-    Título da notícia/tema: {titulo}
-    Resumo da notícia/tema: {resumo}
-    Categoria: {categoria}
-    
-    DIRETRIZES DE LOCALIZAÇÃO (FOCO BRASIL):
-    1. RESTRITO AO BRASIL: Ignore qualquer contexto geopolítico ou social que não afete diretamente o empreendedor brasileiro. Se a notícia base for internacional, você DEVE obrigatoriamente tropicalizar o conteúdo, explicando o impacto direto no mercado interno (PIB, dólar, comportamento de consumo do brasileiro ou plataformas locais).
-    2. ECOSSISTEMA LOCAL: Cite, quando pertinente, a realidade de quem utiliza plataformas como Kiwify, Hotmart, Eduzz, Monetizze, Braip e o cenário de MEI/PMEs no Brasil.
-    3. LINGUAGEM: Use português do Brasil, com termos técnicos de marketing digital adotados no país.
-    
-    DIRETRIZES OBRIGATÓRIAS DE CONTEÚDO:
-    - Tom e Estilo: Profissional, educativo e analítico. Evite sensacionalismo e promessas de "dinheiro rápido".
-    - Extensão: Entre 600 e 800 palavras. Desenvolva parágrafos densos e com insights práticos.
-    - Originalidade: Transforme a notícia em uma análise consultiva. O leitor deve terminar a leitura sabendo "o que fazer agora" no seu negócio no Brasil.
-    
-    ESTRUTURA DO TEXTO:
-    1. Título: Estratégico, focado em análise de mercado para brasileiros.
-    2. Lide (Lead): Conecte o fato imediatamente à realidade dos negócios digitais ou carreiras no Brasil.
-    3. Subtítulos: Organize com pelo menos dois subtítulos (ex: "Desafios no Cenário Nacional" e "Estratégias de Adaptação").
-    4. Corpo: Explique o "porquê" por trás dos dados com viés consultivo para produtores, afiliados ou estudantes brasileiros.
-    5. Conclusão Analítica: Visão estratégica sobre o futuro da tendência no Brasil e incentivo à profissionalização.
-    
-    Importante:
-    - Proibido mencionar eventos estrangeiros que não possuam correlação direta e explicada com o Brasil.
-    - Não escreva explicações externas ou observações adicionais.
-    - Entregue apenas o texto final estruturado.
-    """
+        prompt = f"""
+Atue como um Estrategista de Negócios Digitais e Especialista em Marketing Digital com 20 anos de experiência no mercado brasileiro de Infoprodutos e Empreendedorismo.
+
+Seu objetivo: Redigir um artigo educativo e estratégico baseado nas informações fornecidas. O texto deve seguir o padrão de autoridade da Forbes Brasil ou Exame, com foco total no cenário econômico e digital do BRASIL.
+
+Informações base:
+Título da notícia/tema: {titulo}
+Resumo da notícia/tema: {resumo}
+Categoria: {categoria}
+
+DIRETRIZES DE LOCALIZAÇÃO (FOCO BRASIL):
+1. RESTRITO AO BRASIL: Ignore qualquer contexto geopolítico ou social que não afete diretamente o empreendedor brasileiro. Se a notícia base for internacional, você DEVE obrigatoriamente tropicalizar o conteúdo, explicando o impacto direto no mercado interno (PIB, dólar, comportamento de consumo do brasileiro ou plataformas locais).
+2. ECOSSISTEMA LOCAL: Cite, quando pertinente, a realidade de quem utiliza plataformas como Kiwify, Hotmart, Eduzz, Monetizze, Braip e o cenário de MEI/PMEs no Brasil.
+3. LINGUAGEM: Use português do Brasil, com termos técnicos de marketing digital adotados no país.
+
+DIRETRIZES OBRIGATÓRIAS DE CONTEÚDO:
+- Tom e Estilo: Profissional, educativo e analítico. Evite sensacionalismo e promessas de "dinheiro rápido".
+- Extensão: Entre 600 e 800 palavras. Desenvolva parágrafos densos e com insights práticos.
+- Originalidade: Transforme a notícia em uma análise consultiva. O leitor deve terminar a leitura sabendo "o que fazer agora" no seu negócio no Brasil.
+
+ESTRUTURA DO TEXTO:
+1. Título: Estratégico, focado em análise de mercado para brasileiros.
+2. Lide (Lead): Conecte o fato imediatamente à realidade dos negócios digitais ou carreiras no Brasil.
+3. Subtítulos: Organize com pelo menos dois subtítulos (ex: "Desafios no Cenário Nacional" e "Estratégias de Adaptação").
+4. Corpo: Explique o "porquê" por trás dos dados com viés consultivo para produtores, afiliados ou estudantes brasileiros.
+5. Conclusão Analítica: Visão estratégica sobre o futuro da tendência no Brasil e incentivo à profissionalização.
+
+Importante:
+- Proibido mencionar eventos estrangeiros que não possuam correlação direta e explicada com o Brasil.
+- Não escreva explicações externas ou observações adicionais.
+- Entregue apenas o texto final estruturado.
+"""
 
         response = self.client.models.generate_content(
             model="gemini-3-flash-preview",
