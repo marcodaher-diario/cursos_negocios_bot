@@ -40,7 +40,7 @@ class GeminiEngine:
 
     def _executar_com_resiliencia(self, prompt):
         """
-        Nova lógica de 9 tentativas (3 ciclos x 3 modelos) 
+        Lógica de 9 tentativas (3 ciclos x 3 modelos) 
         sem alterar os prompts originais.
         """
         tentativa_total = 1
@@ -65,7 +65,6 @@ class GeminiEngine:
                         time.sleep(5) # Pausa curta antes da próxima tentativa
                     else:
                         print(f"❌ Erro crítico no modelo {modelo}: {e}")
-                        # Mesmo em erro crítico, tentamos o próximo modelo do ciclo
                 
                 tentativa_total += 1
         
@@ -76,7 +75,9 @@ class GeminiEngine:
 # ==========================================================
 
     def gerar_analise_jornalistica(self, titulo, resumo, categoria):
-
+        """
+        Gera o artigo principal seguindo o tom da Forbes/Exame focado no Brasil.
+        """
         prompt = f"""
 Atue como um Estrategista de Negócios Digitais e Especialista em Marketing Digital com 20 anos de experiência no mercado brasileiro de Infoprodutos e Empreendedorismo.
 
@@ -109,8 +110,17 @@ Importante:
 - Não escreva explicações externas ou observações adicionais.
 - Entregue apenas o texto final estruturado.
 """
+        # Executa o prompt usando a lógica de resiliência (os 3 modelos que você validou)
+        resultado = self._executar_com_resiliencia(prompt)
 
-       return response.text.strip()
+        if resultado:
+            return self._limpar_e_formatar_markdown(resultado)
+        
+        return "Erro: Falha total da API após 9 tentativas ao gerar artigo"
+
+# ==========================================================
+# GERAR QUERY VISUAL PARA BUSCA DE IMAGENS
+# ==========================================================
 
     def gerar_query_visual(self, titulo, resumo):
         """
@@ -137,7 +147,6 @@ Resumo: {resumo}
 
         if resultado:
             texto_puro = resultado.strip()
-            # Aplica a limpeza e conversão de tags ORIGINAL
             return self._limpar_e_formatar_markdown(texto_puro)
         
-        return "Erro: Falha total da API após 9 tentativas ao gerar artigo"    
+        return "business workspace professional"
