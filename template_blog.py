@@ -3,7 +3,7 @@
 def formatar_texto(texto, titulo_principal):
     """
     Processa o corpo do texto: H2 para subtítulos e P para parágrafos.
-    Remove repetições do título principal para evitar o erro visual.
+    Remove repetições do título principal dentro do corpo do texto.
     """
     if not texto:
         return ""
@@ -41,32 +41,35 @@ def formatar_texto(texto, titulo_principal):
 
 def obter_esqueleto_html(dados):
     """
-    Gera o HTML final garantindo que o título apareça dentro do post
-    antes da imagem, conforme solicitado na Ordem 2.
+    Gera o HTML final. 
+    A Ordem 2 (Título) é cumprida via CSS injetado para formatar o título nativo do Blogger.
     """
     titulo = dados.get("titulo", "").strip()
     imagem = dados.get("imagem", "").strip()
     texto_bruto = dados.get("texto_completo", "")
     assinatura = dados.get("assinatura", "")
 
-    # Ordem 6: Formata o texto e já limpa repetições do título no corpo
     conteudo_formatado = formatar_texto(texto_bruto, titulo)
     COR_MD = "rgb(7, 55, 99)"
 
+    # O CSS abaixo captura os seletores mais comuns de títulos do Blogger
     return f"""
-<div style="max-width:900px !important; margin:auto !important; font-family:Arial, sans-serif !important;">
+<style>
+    /* Ordem 2: Formata o título externo do Blogger (caixa de título) */
+    h1.post-title, h1.entry-title, h2.post-title, h3.post-title, .post-title {{
+        text-align:center !important; 
+        font-family:Arial, sans-serif !important; 
+        font-size:28px !important; 
+        font-weight:bold !important; 
+        color:{COR_MD} !important; 
+        text-transform:uppercase !important;
+        margin-bottom:20px !important;
+        margin-top:10px !important;
+        display: block !important;
+    }}
+</style>
 
-    <div style="text-align:center !important; 
-                font-family:Arial !important; 
-                font-size:28px !important; 
-                font-weight:bold !important; 
-                color:{COR_MD} !important; 
-                text-transform:uppercase !important; 
-                margin-top:10px !important;
-                margin-bottom:25px !important;
-                display:block !important;">
-        {titulo}
-    </div>
+<div style="max-width:900px !important; margin:auto !important; font-family:Arial, sans-serif !important;">
 
     <div style="text-align:center !important; margin-bottom:25px !important;">
         <img src="{imagem}" style="width:100% !important; height:auto !important; display:block !important; margin:auto !important; border-radius:8px !important;">
