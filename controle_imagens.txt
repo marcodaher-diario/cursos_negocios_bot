@@ -18,3 +18,4 @@
 2026-03-06|negocios|https://images.pexels.com/photos/27288569/pexels-photo-27288569.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-06|cursos|https://images.pexels.com/photos/4833238/pexels-photo-4833238.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-06|cursos|https://images.pexels.com/photos/7857551/pexels-photo-7857551.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-03-07|cursos|https://images.pexels.com/photos/6803533/pexels-photo-6803533.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
