@@ -7,22 +7,21 @@ from datetime import datetime, timedelta
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from email.utils import parsedate_to_datetime
-from configuracoes import PESOS_POR_TEMA
 
-# Importando os novos nomes de variáveis do seu configuracoes.py atualizado
+# Importando as configurações centralizadas
 from configuracoes import (
     BLOG_ID,
     RSS_FEEDS,
-    PALAVRAS_CURSOS_E_CONTEUDO,   # Antiga Policial
-    PALAVRAS_NEGOCIOS_DIGITAIS,   # Antiga Politica
-    PALAVRAS_OPORTUNIDADES_E_RENDA, # Antiga Economia
+    PALAVRAS_CURSOS_E_CONTEUDO,
+    PALAVRAS_NEGOCIOS_DIGITAIS,
+    PALAVRAS_OPORTUNIDADES_E_RENDA,
+    PESOS_POR_TEMA,
     BLOCO_FIXO_FINAL
 )
 
 from template_blog import obter_esqueleto_html
 from gemini_engine import GeminiEngine
 from imagem_engine import ImageEngine
-
 
 # ==========================================================
 # CONFIGURAÇÃO DO NOVO NICHO
@@ -31,32 +30,25 @@ from imagem_engine import ImageEngine
 # Mapeamento: (Dia_da_Semana, "HH:MM") -> Tema
 # 0:Seg, 1:Ter, 2:Qua, 3:Qui, 4:Sex, 5:Sab, 6:Dom
 AGENDA_POSTAGENS = {
-    (1, "15:00"): "cursos",       # Terça
-    (3, "15:00"): "cursos",       # Quinta
-    (5, "15:00"): "cursos",       # Sábado
+    (1, "15:00"): "cursos",        # Terça
+    (3, "15:00"): "cursos",        # Quinta
+    (5, "15:00"): "cursos",        # Sábado
     
-    (0, "15:00"): "negocios",     # Segunda
-    (2, "15:00"): "negocios",     # Quarta
-    (4, "15:00"): "negocios",     # Sexta
+    (0, "15:00"): "negocios",      # Segunda
+    (2, "15:00"): "negocios",      # Quarta
+    (4, "15:00"): "negocios",      # Sexta
     
     (0, "17:00"): "oportunidades", # Segunda
     (3, "17:00"): "oportunidades", # Quinta
     (6, "17:00"): "oportunidades", # Domingo
 }
 
-def obter_tema_atual():
-    agora = obter_horario_brasilia() # Melhor usar sua função de Brasília já pronta
-    dia_semana = agora.weekday()
-    hora_formatada = agora.strftime("%H:00")
-    return AGENDA_POSTAGENS.get((dia_semana, hora_formatada), "tema_padrao")
-
 JANELA_MINUTOS = 60
 ARQUIVO_CONTROLE_DIARIO = "controle_diario.txt"
 ARQUIVO_POSTS_PUBLICADOS = "posts_publicados.txt"
 
-
 # ==========================================================
-# UTILIDADES E LIMPEZA (NOVA FUNÇÃO ADICIONADA AQUI)
+# UTILIDADES E LIMPEZA
 # ==========================================================
 
 def obter_horario_brasilia():
@@ -83,9 +75,8 @@ def horario_para_minutos(hhmm):
 def dentro_da_janela(min_atual, min_agenda):
     return abs(min_atual - min_agenda) <= JANELA_MINUTOS
 
-
 # ==========================================================
-# CONTROLE DE PUBLICAÇÃO E LINKS (MANTIDOS)
+# CONTROLE DE PUBLICAÇÃO E LINKS
 # ==========================================================
 
 def ja_postou(data_str, horario_agenda):
@@ -132,9 +123,8 @@ def link_ja_publicado(link):
     with open(ARQUIVO_POSTS_PUBLICADOS, "r", encoding="utf-8") as f:
         return any(link.strip() == l.strip() for l in f)
 
-
 # ==========================================================
-# VERIFICAR TEMA (ADAPTADO)
+# VERIFICAR TEMA
 # ==========================================================
 
 def verificar_assunto(titulo, texto):
@@ -147,9 +137,8 @@ def verificar_assunto(titulo, texto):
         return "oportunidades"
     return "geral"
 
-
 # ==========================================================
-# GERAR TAGS SEO (MANTIDO)
+# GERAR TAGS SEO
 # ==========================================================
 
 def gerar_tags_seo(titulo, texto):
@@ -160,7 +149,7 @@ def gerar_tags_seo(titulo, texto):
     for p in palavras:
         if p not in stopwords and p not in tags:
             tags.append(p.capitalize())
-    tags_fixas = ["Negócios", "Cursos", "Empreendedorismo"] # Tags adaptadas
+    tags_fixas = ["Negócios", "Cursos", "Empreendedorismo"]
     for tf in tags_fixas:
         if tf not in tags:
             tags.append(tf)
@@ -174,9 +163,8 @@ def gerar_tags_seo(titulo, texto):
             break
     return resultado
 
-
 # ==========================================================
-# BUSCAR NOTÍCIA COM RANKING ESTRATÉGICO (ADAPTADO)
+# BUSCAR NOTÍCIA COM RANKING ESTRATÉGICO
 # ==========================================================
 
 def buscar_noticia(tipo):
@@ -191,19 +179,16 @@ def buscar_noticia(tipo):
             resumo_bruto = entry.get("summary", "")
             link = entry.get("link", "")
             
-            # Limpando o resumo antes de qualquer análise
             resumo = limpar_e_filtrar_conteudo(resumo_bruto)
 
             if not titulo or not link: continue
             if verificar_assunto(titulo, resumo) != tipo: continue
             if link_ja_publicado(link): continue
 
-            # Lógica de imagem original mantida
             imagem = ""
             if "media_content" in entry and len(entry.media_content) > 0:
                 imagem = entry.media_content[0].get("url", "")
 
-            # Validação de data original mantida
             data_publicacao = None
             if hasattr(entry, "published"):
                 try:
@@ -234,9 +219,8 @@ def buscar_noticia(tipo):
     noticia_escolhida = max(noticias_validas, key=lambda x: x["score"])
     return noticia_escolhida
 
-
 # ==========================================================
-# MODO TESTE (ADAPTADO PARA NOVOS TEMAS)
+# MODO TESTE
 # ==========================================================
 
 def executar_modo_teste(tema_forcado=None, publicar=False):
@@ -252,7 +236,6 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
     gemini = GeminiEngine()
     imagem_engine = ImageEngine()
 
-    # Passa o resumo já limpo para a IA
     texto_ia = gemini.gerar_analise_jornalistica(noticia["titulo"], noticia["texto"], tema_forcado)
     query_visual = gemini.gerar_query_visual(noticia["titulo"], noticia["texto"])
     imagem_final = imagem_engine.obter_imagem(noticia, tema_forcado, query_ia=query_visual)
@@ -266,8 +249,10 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
     }
 
     html = obter_esqueleto_html(dados)
-    service = Credentials.from_authorized_user_file("token.json")
-    service = build("blogger", "v3", credentials=service)
+    
+    # Ajuste técnico na autenticação
+    creds = Credentials.from_authorized_user_file("token.json")
+    service = build("blogger", "v3", credentials=creds)
 
     service.posts().insert(
         blogId=BLOG_ID,
@@ -276,9 +261,8 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
     ).execute()
     print("Postagem de teste concluída.")
 
-
 # ==========================================================
-# EXECUÇÃO PRINCIPAL (MANTIDA COM ADAPTAÇÃO DE TEMAS)
+# EXECUÇÃO PRINCIPAL
 # ==========================================================
 
 if __name__ == "__main__":
@@ -289,22 +273,22 @@ if __name__ == "__main__":
         exit()
 
     agora = obter_horario_brasilia()
-    dia_atual = agora.weekday() # Pegamos o dia da semana (0-6)
+    dia_atual = agora.weekday()
     min_atual = agora.hour * 60 + agora.minute
     data_hoje = agora.strftime("%Y-%m-%d")
 
     horario_escolhido = None
     tema_escolhido = None
 
-    # Ajustado para desempacotar a tupla ((dia, hora), tema)
     for (dia_agenda, hora_string), tema in AGENDA_POSTAGENS.items():
-        if dia_agenda == dia_atual: # Só verifica se for o dia correto
+        if dia_agenda == dia_atual:
             min_agenda = horario_para_minutos(hora_string)
             if dentro_da_janela(min_atual, min_agenda):
                 if not ja_postou(data_hoje, hora_string):
                     horario_escolhido = hora_string
                     tema_escolhido = tema
                     break
+    
     if not horario_escolhido:
         exit()
 
@@ -330,8 +314,9 @@ if __name__ == "__main__":
 
     html = obter_esqueleto_html(dados)
 
-    service = Credentials.from_authorized_user_file("token.json")
-    service = build("blogger", "v3", credentials=service)
+    # Ajuste técnico na autenticação
+    creds = Credentials.from_authorized_user_file("token.json")
+    service = build("blogger", "v3", credentials=creds)
 
     service.posts().insert(
         blogId=BLOG_ID,
