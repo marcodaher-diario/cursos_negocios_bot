@@ -48,6 +48,25 @@ PALAVRAS_OPORTUNIDADES_E_RENDA = [
     "finanças", "pme", "inovação", "startup", "mercado", "tendência"
 ]
 
+# ==========================================================
+# RANKING ESTRATÉGICO DE PESOS 
+# ==========================================================
+PESOS_POR_TEMA = {
+    "cursos": {
+        "curso": 15, "gratuito": 12, "vagas": 10, "e-book": 12, "inscrição": 9,
+        "especialização": 10, "treinamento": 9, "mentoria": 11, "certificado": 10
+    },
+    "negocios": {
+        "kiwify": 15, "hotmart": 15, "monetizze": 15, "eduzz": 15, "braip": 15,
+        "marketing digital": 13, "afiliado": 12, "vendas": 10, "estratégia": 9, 
+        "lucro": 10, "copywriting": 11
+    },
+    "oportunidades": {
+        "renda extra": 15, "home office": 12, "trabalho remoto": 12, "trabalho em casa": 11, 
+        "mei": 10, "franquia": 11, "investimento": 9, "startup": 10, "carreira": 9, "pme": 8
+    }
+}
+
 # ==========================================
 # BLOCO FIXO FINAL -  ASSINATURA
 # ==========================================
