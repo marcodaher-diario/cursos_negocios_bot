@@ -145,7 +145,7 @@ def obter_esqueleto_html(dados):
         {conteudo_formatado}
     </div>
 
-    <div class="assinatura-container">
+    <div class="assinatura-final">
         {assinatura}
     </div>
 </div>
