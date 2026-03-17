@@ -7,9 +7,9 @@ import re
 CONFIG_VISUAL = {
     "cor_md": "rgb(7, 55, 99)",
     "fonte": "Arial, sans-serif",
-    "tamanho_titulo": "28px",
-    "tamanho_sub": "20px",
-    "tamanho_texto": "18px"
+    "tamanho_titulo": "26px",
+    "tamanho_sub": "19px",
+    "tamanho_texto": "17px"
 }
 
 def formatar_texto_ultra(texto_bruto, titulo_principal):
