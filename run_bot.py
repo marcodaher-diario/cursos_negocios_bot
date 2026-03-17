@@ -240,7 +240,11 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
     query_visual = gemini.gerar_query_visual(noticia["titulo"], noticia["texto"])
     imagem_final = imagem_engine.obter_imagem(noticia, tema_forcado, query_ia=query_visual)
 
-    tags = gerar_tags_seo(noticia["titulo"], texto_ia)
+    tags_geradas = gerar_tags_seo(noticia["titulo"], texto_ia)
+    tags_finais = [str(t).strip() for t in tags_geradas if t]
+    if not tags_finais:
+        tags_finais = ["Notícias", "Empreendedorismo"]
+        
     dados = {
         "titulo": noticia["titulo"],
         "imagem": imagem_final,
@@ -250,16 +254,26 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
 
     html = obter_esqueleto_html(dados)
     
-    # Ajuste técnico na autenticação
-    creds = Credentials.from_authorized_user_file("token.json")
-    service = build("blogger", "v3", credentials=creds)
+   try:
+        creds = Credentials.from_authorized_user_file("token.json")
+        service = build("blogger", "v3", credentials=creds)
 
-    service.posts().insert(
-        blogId=BLOG_ID,
-        body={"title": noticia["titulo"], "content": html, "labels": tags},
-        isDraft=not publicar
-    ).execute()
-    print("Postagem de teste concluída.")
+        service.posts().insert(
+            blogId=BLOG_ID,
+            body={
+                "title": noticia["titulo"], 
+                "content": html, 
+                "labels": tags_finais # Enviando a lista sanitizada
+            },
+            isDraft=not publicar
+        ).execute()
+        print(f"✅ Sucesso total: {noticia['titulo']}")
+        
+    except Exception as e:
+        print(f"❌ Erro 400 no Blogger: {e}")
+        # Isso vai te mostrar no log exatamente o que causou o erro
+        print(f"DEBUG - Tags tentadas: {tags_finais}")
+        print("Postagem de teste concluída.")
 
 # ==========================================================
 # EXECUÇÃO PRINCIPAL
