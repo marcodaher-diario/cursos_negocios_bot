@@ -5,11 +5,11 @@ import re
 # CONFIGURAÇÃO DE IDENTIDADE VISUAL (CORINGA V3.1)
 # ==========================================================
 CONFIG_VISUAL = {
-    "cor_md": "rgb(7, 55, 99)" !important,
-    "fonte": "Arial, sans-serif" !important,
-    "tamanho_titulo": "28px" !important,
-    "tamanho_sub": "26px" !important,
-    "tamanho_texto": "19px" !important
+    "cor_md": "rgb(7, 55, 99)",
+    "fonte": "Arial, sans-serif",
+    "tamanho_titulo": "28px",
+    "tamanho_sub": "26px",
+    "tamanho_texto": "19px"
 }
 
 def formatar_texto_ultra(texto_bruto, titulo_principal):
