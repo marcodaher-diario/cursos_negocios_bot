@@ -1,87 +1,152 @@
 # -*- coding: utf-8 -*-
+import re
 
-def formatar_texto(texto, titulo_principal):
-    """
-    Processa o corpo do texto: H2 para subtítulos e P para parágrafos.
-    Remove repetições do título principal dentro do corpo do texto.
-    """
-    if not texto:
+# ==========================================================
+# CONFIGURAÇÃO DE IDENTIDADE VISUAL (O SEGREDO DO CORINGA)
+# ==========================================================
+# Altere estes valores para mudar o visual de qualquer blog instantaneamente
+CONFIG_VISUAL = {
+    "cor_primaria": "rgb(7, 55, 99)",  # Azul escuro (seu padrão MD)
+    "fonte_principal": "Arial, sans-serif",
+    "tamanho_titulo": "28px",
+    "tamanho_subtitulo": "20px",
+    "tamanho_corpo": "18px",
+    "max_width": "900px"
+}
+
+def formatar_texto_ultra(texto_bruto, titulo_principal):
+    if not texto_bruto:
         return ""
-        
-    linhas = [l.strip() for l in texto.split("\n") if l.strip()]
+
+    linhas = [l.strip() for l in texto_bruto.split("\n") if l.strip()]
     html_final = ""
-    COR_MD = "rgb(7, 55, 99)"
     titulo_norm = titulo_principal.strip().lower()
+    
+    em_lista = False
 
     for linha in linhas:
-        linha_limpa = linha.strip("#* ").strip()
+        # 1. PROCESSAMENTO DE MARKDOWN
+        # Negrito: **texto** -> <strong>
+        linha = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", linha)
+        # Itálico: *texto* ou _texto_ -> <em> (Evitando conflito com listas)
+        linha = re.sub(r"(?<!\*)\*(?!\*)(.*?)\*", r"<em>\1</em>", linha)
         
-        # Pula a linha se for repetição do título (limpeza inteligente)
+        # 2. IDENTIFICAÇÃO DE LISTAS (Inicia com * ou - ou •)
+        match_lista = re.match(r"^[\*\-\•]\s*(.*)", linha)
+        if match_lista:
+            conteudo_item = match_lista.group(1)
+            if not em_lista:
+                html_final += '<ul class="lista-blog">\n'
+                em_lista = True
+            html_final += f'  <li>{conteudo_item}</li>\n'
+            continue
+        else:
+            if em_lista:
+                html_final += '</ul>\n'
+                em_lista = False
+
+        # 3. LIMPEZA DE MARCADORES RESTANTES (# das pontas)
+        linha_limpa = linha.lstrip("# ").strip()
+
+        # 4. FILTRO DE REPETIÇÃO DO TÍTULO
         if linha_limpa.lower() == titulo_norm:
             continue
+        
+        if not linha_limpa:
+            continue
 
-        # Ordem 5: Subtítulo H2 - Arial 20, Bold, Esquerda, Cor MD, Maiúsculas
-        if linha.startswith("#") or (len(linha_limpa.split()) <= 15 and not linha_limpa.endswith(".")):
-            html_final += f"""
-            <h2 style="text-align:left !important; font-family:Arial !important; color:{COR_MD} !important; 
-                       font-size:20px !important; font-weight:bold !important; text-transform:uppercase !important; 
-                       margin-top:25px !important; margin-bottom:10px !important;">
-                {linha_limpa}
-            </h2>
-            """
+        # 5. CRITÉRIO DE SUBTÍTULO (H2)
+        # Remove HTML para contar palavras reais
+        texto_puro = re.sub(r"<.*?>", "", linha_limpa)
+        palavras = texto_puro.split()
+        
+        # Se for curto e não terminar em ponto, ou se começar com #
+        if (len(palavras) <= 22 and not texto_puro.endswith(".")) or linha.startswith("#"):
+            html_final += f'<h2 class="subtitulo">{linha_limpa}</h2>\n'
         else:
-            # Ordem 6: Texto - Fonte 18, Justificado, Cor MD
-            html_final += f"""
-            <p style="text-align:justify !important; font-family:Arial !important; color:{COR_MD} !important; 
-                      font-size:18px !important; line-height:1.6 !important; margin-bottom:15px !important;">
-                {linha_limpa}
-            </p>
-            """
+            html_final += f'<p class="paragrafo">{linha_limpa}</p>\n'
+
+    if em_lista: html_final += '</ul>\n' # Fecha lista se terminar o texto nela
     return html_final
 
 def obter_esqueleto_html(dados):
-    """
-    Gera o HTML final. 
-    A Ordem 2 (Título) é cumprida via CSS injetado para formatar o título nativo do Blogger.
-    """
     titulo = dados.get("titulo", "").strip()
     imagem = dados.get("imagem", "").strip()
     texto_bruto = dados.get("texto_completo", "")
     assinatura = dados.get("assinatura", "")
 
-    conteudo_formatado = formatar_texto(texto_bruto, titulo)
-    COR_MD = "rgb(7, 55, 99)"
+    conteudo_formatado = formatar_texto_ultra(texto_bruto, titulo)
+    cfg = CONFIG_VISUAL
 
-    # O CSS abaixo captura os seletores mais comuns de títulos do Blogger
     return f"""
 <style>
-    /* Ordem 2: Formata o título externo do Blogger (caixa de título) */
-    h1.post-title, h1.entry-title, h2.post-title, h3.post-title, .post-title {{
-        text-align:center !important; 
-        font-family:Arial, sans-serif !important; 
-        font-size:28px !important; 
-        font-weight:bold !important; 
-        color:{COR_MD} !important; 
-        text-transform:uppercase !important;
-        margin-bottom:20px !important;
-        margin-top:10px !important;
-        display: block !important;
+    /* CSS CENTRALIZADO E VARIÁVEL */
+    .post-container {{
+        max-width: {cfg['max_width']};
+        margin: auto;
+        font-family: {cfg['fonte_principal']} !important;
     }}
+
+    /* Ordem 2: Título do Blogger */
+    .post-title, .entry-title, h1.post-title, h3.post-title {{
+        text-align: center !important;
+        font-family: {cfg['fonte_principal']} !important;
+        font-size: {cfg['tamanho_titulo']} !important;
+        font-weight: bold !important;
+        color: {cfg['cor_primaria']} !important;
+        text-transform: uppercase !important;
+        margin: 20px 0 !important;
+    }}
+
+    .post-img {{
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        border-radius: 8px !important;
+        margin-bottom: 25px;
+    }}
+
+    .subtitulo {{
+        text-align: left !important;
+        color: {cfg['cor_primaria']} !important;
+        font-size: {cfg['tamanho_subtitulo']} !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+        margin-top: 30px !important;
+        margin-bottom: 12px !important;
+    }}
+
+    .paragrafo {{
+        text-align: justify !important;
+        color: {cfg['cor_primaria']} !important;
+        font-size: {cfg['tamanho_corpo']} !important;
+        line-height: 1.7 !important;
+        margin-bottom: 18px !important;
+    }}
+
+    .lista-blog {{
+        color: {cfg['cor_primaria']} !important;
+        font-size: {cfg['tamanho_corpo']} !important;
+        margin-bottom: 20px;
+        padding-left: 25px;
+    }}
+
+    .lista-blog li {{
+        margin-bottom: 8px;
+    }}
+
 </style>
 
-<div style="max-width:900px !important; margin:auto !important; font-family:Arial, sans-serif !important;">
-
-    <div style="text-align:center !important; margin-bottom:25px !important;">
-        <img src="{imagem}" style="width:100% !important; height:auto !important; display:block !important; margin:auto !important; border-radius:8px !important;">
-    </div>
-
-    <div>
+<div class="post-container">
+    <img src="{imagem}" alt="{titulo}" class="post-img">
+    
+    <div class="conteudo-post">
         {conteudo_formatado}
     </div>
 
-    <div style="margin-top:40px !important; padding-top:20px !important; border-top:1px solid #eee !important; color:{COR_MD} !important;">
+    <div class="assinatura-container">
         {assinatura}
     </div>
-
 </div>
 """
