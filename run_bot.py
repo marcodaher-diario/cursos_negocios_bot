@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from email.utils import parsedate_to_datetime
+from configuracoes import PESOS_POR_TEMA
 
 # Importando os novos nomes de variáveis do seu configuracoes.py atualizado
 from configuracoes import (
@@ -179,22 +180,7 @@ def gerar_tags_seo(titulo, texto):
 # ==========================================================
 
 def buscar_noticia(tipo):
-    pesos_por_tema = {
-        "cursos": {
-            "curso": 15, "gratuito": 12, "vagas": 10, "e-book": 12, "inscrição": 9,
-            "especialização": 10, "treinamento": 9, "mentoria": 11, "certificado": 10
-        },
-        "negocios": {
-            "kiwify": 15, "hotmart": 15, "monetizze": 15, "eduzz": 15, "braip": 15,"marketing digital": 13, 
-            "afiliado": 12, "vendas": 10, "estratégia": 9, "lucro": 10, "eduzz": 12, "copywriting": 11
-        },
-        "oportunidades": {
-            "renda extra": 15, "home office": 12, "trabalho remoto": 12, "trabalho em casa": 11, "mei": 10,
-            "franquia": 11, "investimento": 9, "startup": 10, "carreira": 9, "pme": 8
-        }
-    }
-
-    palavras_peso = pesos_por_tema.get(tipo, {})
+    palavras_peso = PESOS_POR_TEMA.get(tipo, {})  
     noticias_validas = []
     agora = datetime.utcnow()
 
