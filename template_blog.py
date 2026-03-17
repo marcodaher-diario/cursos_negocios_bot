@@ -47,7 +47,7 @@ def formatar_texto_ultra(texto_bruto, titulo_principal):
         # Subtítulos H2 com Estilo Direto (Garante que funcione sempre)
         if (len(palavras) <= 22 and not texto_para_contagem.endswith(".")) or linha.startswith("#"):
             html_final += f"""
-            <h2 style="text-align:left !important; color:{CONFIG_VISUAL['cor_md']} !important; font-family:{CONFIG_VISUAL['fonte']} !important; font-size:{CONFIG_VISUAL['tamanho_sub']} !important; font-weight:bold !important; text-transform:uppercase !important; margin-top:30px !important; margin-bottom:12px !important; display:block !important; clear:both !important; -webkit-font-smoothing: antialiased !important;">
+            <h2 style="text-align:left !important; color:{CONFIG_VISUAL['cor_md']} !important; font-family:{CONFIG_VISUAL['fonte']} !important; font-size:{CONFIG_VISUAL['tamanho_sub']} !important; text-transform:uppercase !important; margin-top:30px !important; margin-bottom:12px !important; display:block !important; clear:both !important; -webkit-font-smoothing: antialiased !important;">
                 {linha_limpa}
             </h2>\n"""
         else:
