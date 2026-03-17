@@ -118,8 +118,7 @@ def obter_esqueleto_html(dados):
         -webkit-font-smoothing: antialiased !important; 
         -moz-osx-font-smoothing: grayscale !important;  
         letter-spacing: 0.5px !important;               
-        clear: both !important;                        
-    }
+        clear: both !important; 
     }}
 
     .paragrafo {{
