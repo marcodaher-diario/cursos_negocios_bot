@@ -2,71 +2,62 @@
 import re
 
 # ==========================================================
-# CONFIGURAÇÃO DE IDENTIDADE VISUAL (O SEGREDO DO CORINGA)
+# CONFIGURAÇÃO DE IDENTIDADE VISUAL (CORINGA V3.1)
 # ==========================================================
-# Altere estes valores para mudar o visual de qualquer blog instantaneamente
 CONFIG_VISUAL = {
-    "cor_primaria": "rgb(7, 55, 99)",  # Azul escuro (seu padrão MD)
-    "fonte_principal": "Arial, sans-serif",
+    "cor_md": "rgb(7, 55, 99)",
+    "fonte": "Arial, sans-serif",
     "tamanho_titulo": "28px",
-    "tamanho_subtitulo": "20px",
-    "tamanho_corpo": "18px",
-    "max_width": "900px"
+    "tamanho_sub": "20px",
+    "tamanho_texto": "18px"
 }
 
 def formatar_texto_ultra(texto_bruto, titulo_principal):
-    if not texto_bruto:
-        return ""
-
+    if not texto_bruto: return ""
     linhas = [l.strip() for l in texto_bruto.split("\n") if l.strip()]
     html_final = ""
     titulo_norm = titulo_principal.strip().lower()
-    
     em_lista = False
 
     for linha in linhas:
-        # 1. PROCESSAMENTO DE MARKDOWN
-        # Negrito: **texto** -> <strong>
+        # Markdown Simples
         linha = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", linha)
-        # Itálico: *texto* ou _texto_ -> <em> (Evitando conflito com listas)
         linha = re.sub(r"(?<!\*)\*(?!\*)(.*?)\*", r"<em>\1</em>", linha)
         
-        # 2. IDENTIFICAÇÃO DE LISTAS (Inicia com * ou - ou •)
-        match_lista = re.match(r"^[\*\-\•]\s*(.*)", linha)
+        # Listas
+        match_lista = re.match(r"^([\*\-\•]|\d+\.)\s*(.*)", linha)
         if match_lista:
-            conteudo_item = match_lista.group(1)
+            conteudo_item = match_lista.group(2)
             if not em_lista:
-                html_final += '<ul class="lista-blog">\n'
+                html_final += '<ul style="margin-bottom:20px; padding-left:30px;">\n'
                 em_lista = True
-            html_final += f'  <li>{conteudo_item}</li>\n'
+            html_final += f'  <li style="color:{CONFIG_VISUAL["cor_md"]}; font-size:{CONFIG_VISUAL["tamanho_texto"]}; margin-bottom:10px;">{conteudo_item}</li>\n'
             continue
         else:
             if em_lista:
                 html_final += '</ul>\n'
                 em_lista = False
 
-        # 3. LIMPEZA DE MARCADORES RESTANTES (# das pontas)
         linha_limpa = linha.lstrip("# ").strip()
+        if linha_limpa.lower() == titulo_norm or not linha_limpa: continue
 
-        # 4. FILTRO DE REPETIÇÃO DO TÍTULO
-        if linha_limpa.lower() == titulo_norm:
-            continue
+        texto_para_contagem = re.sub(r"<.*?>", "", linha_limpa)
+        palavras = texto_para_contagem.split()
         
-        if not linha_limpa:
-            continue
-
-        # 5. CRITÉRIO DE SUBTÍTULO (H2)
-        # Remove HTML para contar palavras reais
-        texto_puro = re.sub(r"<.*?>", "", linha_limpa)
-        palavras = texto_puro.split()
-        
-        # Se for curto e não terminar em ponto, ou se começar com #
-        if (len(palavras) <= 22 and not texto_puro.endswith(".")) or linha.startswith("#"):
-            html_final += f'<h2 class="subtitulo">{linha_limpa}</h2>\n'
+        # Subtítulos H2 com Estilo Direto (Garante que funcione sempre)
+        if (len(palavras) <= 22 and not texto_para_contagem.endswith(".")) or linha.startswith("#"):
+            html_final += f"""
+            <h2 style="text-align:left !important; color:{CONFIG_VISUAL['cor_md']} !important; font-family:{CONFIG_VISUAL['fonte']} !important; font-size:{CONFIG_VISUAL['tamanho_sub']} !important; font-weight:bold !important; text-transform:uppercase !important; margin-top:30px !important; margin-bottom:12px !important; display:block !important; clear:both !important; -webkit-font-smoothing: antialiased !important;">
+                {linha_limpa}
+            </h2>\n"""
         else:
-            html_final += f'<p class="paragrafo">{linha_limpa}</p>\n'
+            # Parágrafos com Estilo Direto
+            html_final += f"""
+            <p style="text-align:justify !important; color:{CONFIG_VISUAL['cor_md']} !important; font-family:{CONFIG_VISUAL['fonte']} !important; font-size:{CONFIG_VISUAL['tamanho_texto']} !important; line-height:1.6 !important; margin-bottom:15px !important;">
+                {linha_limpa}
+            </p>\n"""
 
-    if em_lista: html_final += '</ul>\n' # Fecha lista se terminar o texto nela
+    if em_lista: html_final += '</ul>\n'
     return html_final
 
 def obter_esqueleto_html(dados):
@@ -74,82 +65,33 @@ def obter_esqueleto_html(dados):
     imagem = dados.get("imagem", "").strip()
     texto_bruto = dados.get("texto_completo", "")
     assinatura = dados.get("assinatura", "")
-
     conteudo_formatado = formatar_texto_ultra(texto_bruto, titulo)
-    cfg = CONFIG_VISUAL
+    c = CONFIG_VISUAL
 
+    # Voltamos ao estilo Inline para os Títulos para garantir que o Blogger não ignore
     return f"""
-<style>
-    /* CSS CENTRALIZADO E VARIÁVEL */
-    .post-container {{
-        max-width: {cfg['max_width']};
-        margin: auto;
-        font-family: {cfg['fonte_principal']} !important;
-    }}
-
-    /* Ordem 2: Título do Blogger */
-    .post-title, .entry-title, h1.post-title, h3.post-title {{
-        text-align: center !important;
-        font-family: {cfg['fonte_principal']} !important;
-        font-size: {cfg['tamanho_titulo']} !important;
-        font-weight: bold !important;
-        color: {cfg['cor_primaria']} !important;
-        text-transform: uppercase !important;
-        margin: 20px 0 !important;
-    }}
-
-    .post-img {{
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16/9;
-        object-fit: cover;
-        border-radius: 8px !important;
-        margin-bottom: 25px;
-    }}
-
-    .subtitulo {{
-        text-align: left !important;
-        color: {cfg['cor_primaria']} !important;
-        font-size: {cfg['tamanho_subtitulo']} !important;
-        font-weight: bold !important;
-        text-transform: uppercase !important;
-        margin-top: 30px !important;
-        margin-bottom: 12px !important;
-        -webkit-font-smoothing: antialiased !important; 
-        -moz-osx-font-smoothing: grayscale !important;  
-        letter-spacing: 0.5px !important;               
-        clear: both !important; 
-    }}
-
-    .paragrafo {{
-        text-align: justify !important;
-        color: {cfg['cor_primaria']} !important;
-        font-size: {cfg['tamanho_corpo']} !important;
-        line-height: 1.7 !important;
-        margin-bottom: 18px !important;
-    }}
-
-    .lista-blog {{
-        color: {cfg['cor_primaria']} !important;
-        font-size: {cfg['tamanho_corpo']} !important;
-        margin-bottom: 20px;
-        padding-left: 25px;
-    }}
-
-    .lista-blog li {{
-        margin-bottom: 8px;
-    }}
-
-</style>
-
-<div class="post-container">
-    <img src="{imagem}" alt="{titulo}" class="post-img">
+<div style="max-width:900px; margin:auto; font-family:{c['fonte']};">
     
-    <div class="conteudo-post">
+    <style>
+        .post-title, .entry-title, h1.post-title, h3.post-title {{
+            text-align: center !important;
+            font-size: {c['tamanho_titulo']} !important;
+            font-weight: bold !important;
+            color: {c['cor_md']} !important;
+            text-transform: uppercase !important;
+            margin: 10px 0 25px 0 !important;
+        }}
+    </style>
+
+    <div style="text-align:center; margin-bottom:30px;">
+        <img src="{imagem}" alt="{titulo}" style="width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:8px;">
+    </div>
+
+    <div class="corpo-post-coringa">
         {conteudo_formatado}
     </div>
 
-    <div class="assinatura-final">
+    <div style="margin-top:40px; border-top:1px solid #eee; padding-top:20px;">
         {assinatura}
     </div>
 </div>
