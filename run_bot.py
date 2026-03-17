@@ -254,7 +254,7 @@ def executar_modo_teste(tema_forcado=None, publicar=False):
 
     html = obter_esqueleto_html(dados)
     
-   try:
+    try:
         creds = Credentials.from_authorized_user_file("token.json")
         service = build("blogger", "v3", credentials=creds)
 
