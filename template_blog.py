@@ -115,6 +115,11 @@ def obter_esqueleto_html(dados):
         text-transform: uppercase !important;
         margin-top: 30px !important;
         margin-bottom: 12px !important;
+        -webkit-font-smoothing: antialiased !important; 
+        -moz-osx-font-smoothing: grayscale !important;  
+        letter-spacing: 0.5px !important;               
+        clear: both !important;                        
+    }
     }}
 
     .paragrafo {{
