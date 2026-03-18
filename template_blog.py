@@ -40,7 +40,7 @@ def formatar_conteudo_inteligente(texto_bruto, titulo_principal):
         palavras = texto_puro.split()
         
         # Critério: Se começa com # (Markdown) ou é curto e sem ponto final
-        e_titulo = (linha.startswith("#") or (len(palavras) <= 15 and not texto_puro.endswith((".", ":", "?", "!"))))
+        e_titulo = (linha.startswith("#") or (len(palavras) <= 22 and not texto_puro.endswith((".", ":", "?", "!"))))
 
         if e_titulo:
             # H1 Manual (Se o usuário usar # no texto)
@@ -70,10 +70,10 @@ def obter_esqueleto_html(dados):
     return f"""
 <style>
 /* Container Principal */
-.post-master {{ max-width:900px; margin:auto; font-family:Open Sans; color:{cor}; line-height:1.6; }}
+.post-master {{ max-width:900px; margin:auto; font-family: 'Open Sans', Arial, sans-serif; color:{cor}; line-height:1.6; }}
 
 /* Títulos Automáticos do Blogger (H1/H3 dependendo do tema) */
-.post-title, .entry-title, h1.post-title, h3.post-title.entry-title {{
+.post-title, .entry-title, h1.post-title {{
     text-align:center!important; font-size:28px!important; text-transform:uppercase!important; 
     font-weight:bold!important; margin:10px 0 25px 0!important; color:{cor}!important;
 }}
