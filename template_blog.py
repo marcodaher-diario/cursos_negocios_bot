@@ -6,10 +6,10 @@ import re
 # ==========================================================
 CONFIG_VISUAL = {
     "cor_md": "rgb(7, 55, 99)",
-    "fonte": "Arial", 
+    "fonte": "Open Sans", 
     "tamanho_titulo": "28px",
-    "tamanho_sub": "24px",
-    "tamanho_texto": "20px"
+    "tamanho_sub": "22px",
+    "tamanho_texto": "18px"
 }
 
 def formatar_texto_ultra(texto_bruto, titulo_principal):
