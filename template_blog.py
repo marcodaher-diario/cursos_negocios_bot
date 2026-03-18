@@ -70,10 +70,10 @@ def obter_esqueleto_html(dados):
     return f"""
 <style>
 /* Container Principal */
-.post-master {{ max-width:900px; margin:auto; font-family:sans-serif; color:{cor}; line-height:1.6; }}
+.post-master {{ max-width:900px; margin:auto; font-family:Open Sans; color:{cor}; line-height:1.6; }}
 
 /* Títulos Automáticos do Blogger (H1/H3 dependendo do tema) */
-.post-title, .entry-title, h1.post-title {{
+.post-title, .entry-title, h1.post-title, h3.post-title.entry-title {{
     text-align:center!important; font-size:28px!important; text-transform:uppercase!important; 
     font-weight:bold!important; margin:10px 0 25px 0!important; color:{cor}!important;
 }}
