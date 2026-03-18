@@ -6,7 +6,7 @@ import re
 # ==========================================================
 CONFIG_VISUAL = {
     "cor_md": "rgb(7, 55, 99)",
-    "fonte": "Arial, sans-serif",
+    "fonte": "Arial", 
     "tamanho_titulo": "28px",
     "tamanho_sub": "24px",
     "tamanho_texto": "20px"
