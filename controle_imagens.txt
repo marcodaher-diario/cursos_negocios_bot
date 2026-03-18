@@ -36,3 +36,4 @@
 2026-03-17|oportunidades|https://images.pexels.com/photos/30530410/pexels-photo-30530410.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-17|oportunidades|https://images.pexels.com/photos/7887816/pexels-photo-7887816.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-18|negocios|https://images.pexels.com/photos/17632052/pexels-photo-17632052.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-03-18|cursos|https://images.pexels.com/photos/8871849/pexels-photo-8871849.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
