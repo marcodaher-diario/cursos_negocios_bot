@@ -50,7 +50,7 @@ def obter_esqueleto_html(dados):
     txt = dados.get("texto_completo", "")
     ass = dados.get("assinatura", "")
     
-    cor = "rgb(7,55,99)"
+    COR_MD = "rgb(7,55,99)"
     conteudo = formatar_conteudo_otimizado(txt, t)
 
     # Estilo concentrado no topo: o Blogger lê uma vez e aplica a tudo
