@@ -55,20 +55,55 @@ def obter_esqueleto_html(dados):
 
     # Estilo concentrado no topo: o Blogger lê uma vez e aplica a tudo
     return f"""
-<style>
-.post-corpo {{ max-width:900px; margin:auto; font-family: 'Open Sans', Arial, sans-serif; color:{cor}; }}
-.post-title, .entry-title {{ text-align:center!important; font-size:28px!important; text-transform:uppercase!important; font-weight:bold!important; margin:10px 0 25px 0!important; color:{cor}!important; }}
-.img-c {{ text-align:center; margin-bottom:25px; }}
-.img-p {{ width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:8px; }}
-.sub {{ font-size:22px!important; text-transform:uppercase!important; font-weight:bold!important; margin-top:25px!important; margin-bottom:10px!important; text-align:left!important; }}
-.txt {{ font-size:18px!important; text-align:justify!important; line-height:1.6!important; margin-bottom:15px!important; }}
-.lst {{ margin-bottom:20px; padding-left:25px; }}
-.lst li {{ font-size:18px!important; margin-bottom:8px; }}
-</style>
 
-<div class="post-corpo">
-    <div class="img-c"><img src="{img}" alt="{t}" class="img-p" loading="lazy"></div>
-    <div class="artigo">{conteudo}</div>
-    <div style="margin-top:30px; border-top:1px solid #eee; padding-top:20px;">{ass}</div>
-</div>
-"""
+<style>
+
+.post-title,
+.entry-title,
+h3.post-title.entry-title{{
+text-align:center !important;
+margin-top:10px !important;
+margin-bottom:20px !important;
+font-family:Arial, sans-serif !important;
+font-size:28px !important;
+font-weight:bold !important;
+text-transform:uppercase !important;
+}}
+
+.post-title a,
+.entry-title a,
+h3.post-title.entry-title a{{
+display:block !important;
+color:{COR_MD} !important;
+}}
+
+.post-title a:hover,
+.entry-title a:hover{{
+color:rgb(10,80,140) !important;
+}}
+
+.post-container {{
+max-width:900px;
+margin:auto;
+font-family:Arial, sans-serif !important;
+}}
+
+.post-img {{
+width:100% !important;
+max-width:100% !important;
+height:auto !important;
+aspect-ratio:16/9 !important;
+object-fit:cover !important;
+border-radius:8px !important;
+}}
+
+.subtitulo {{
+text-align:left !important;
+font-family:Arial, sans-serif !important;
+color:{COR_MD} !important;
+font-size:20px !important;
+font-weight:bold !important;
+text-transform:uppercase !important;
+margin-top:25px !important;
+margin-bottom:10px !important;
+}}
