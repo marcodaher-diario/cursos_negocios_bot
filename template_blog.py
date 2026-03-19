@@ -1,56 +1,55 @@
-# -*- coding: utf-8 -*-
-import re
+def formatar_texto_para_blog(texto_bruto, titulo_principal):
+    if not texto_bruto:
+        return ""
 
-def formatar_conteudo_otimizado(texto_bruto, titulo_principal):
-    if not texto_bruto: return ""
-    
-    # Processamento em lote para ser mais rápido e limpo
+    import re
     linhas = [l.strip() for l in texto_bruto.split("\n") if l.strip()]
-    html_final = []
+    html_final = ""
     titulo_norm = titulo_principal.strip().lower()
-    lista_aberta = False
 
     for linha in linhas:
-        # 1. Negritos Simples (Ocupa menos bytes que estilos inline)
-        l_proc = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", linha)
-        l_limpa = l_proc.strip("#* ").strip()
+        # 1. Primeiro, transformamos o negrito da IA em tag HTML <strong>
+        # Isso mantém o destaque visual sem os asteriscos
+        linha_processada = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", linha)
         
-        if l_limpa.lower() == titulo_norm or not l_limpa:
+        # 2. Agora limpamos marcadores de estrutura (# e * das pontas)
+        # O strip aqui remove os símbolos, mas preserva as tags <strong> internas
+        linha_limpa = linha_processada.strip("#* ").strip()
+
+        # 3. Ignora se for o título repetido
+        if linha_limpa.lower() == titulo_norm:
+            continue
+        
+        if not linha_limpa:
             continue
 
-        # 2. Listas (Compactas)
-        if linha.startswith(("- ", "* ")) or re.match(r"^\d+\.", linha):
-            if not lista_aberta:
-                html_final.append('<ul class="lst">')
-                lista_aberta = True
-            item = re.sub(r"^[-*\d. ]+", "", l_limpa)
-            html_final.append(f'<li>{item}</li>')
-            continue
+        # 4. Critério para Subtítulo (H2):
+        # Removemos as tags HTML apenas para contar palavras reais no critério
+        texto_para_contagem = re.sub(r"<.*?>", "", linha_limpa)
+        palavras = texto_para_contagem.split()
+        
+        if len(palavras) <= 22 and not texto_para_contagem.endswith("."):
+            html_final += f'<h2 class="subtitulo">{linha_limpa}</h2>\n'
         else:
-            if lista_aberta:
-                html_final.append('</ul>')
-                lista_aberta = False
+            # 5. Parágrafo (Mantendo o negrito interno)
+            html_final += f'<p class="paragrafo">{linha_limpa}</p>\n'
 
-        # 3. Identificação de H2 vs P (Nomes de classe curtos para economizar bytes)
-        palavras = re.sub(r"<.*?>", "", l_limpa).split()
-        is_h2 = len(palavras) <= 20 and not l_limpa.endswith((".", ":")) and l_limpa[0].isupper()
+    return html_final
 
-        if is_h2:
-            html_final.append(f'<h2 class="sub">{l_limpa}</h2>')
-        else:
-            html_final.append(f'<p class="txt">{l_limpa}</p>')
-
-    if lista_aberta: html_final.append('</ul>')
-    return "\n".join(html_final)
-
+# ==============================
+# MONTAGEM DO HTML (MANTIDA INTACTA)
+# ==============================
 def obter_esqueleto_html(dados):
-    t = dados.get("titulo", "").strip()
+
+    titulo = dados.get("titulo", "").strip()
     imagem = dados.get("imagem", "").strip()
-    txt = dados.get("texto_completo", "")
-    ass = dados.get("assinatura", "")
-    
+    texto_bruto = dados.get("texto_completo", "")
+    assinatura = dados.get("assinatura", "")
+
+    # Chama a função de organização acima
+    conteudo_formatado = formatar_texto_para_blog(texto_bruto, titulo)
+
     COR_MD = "rgb(7,55,99)"
-    conteudo = formatar_conteudo_otimizado(txt, t)
 
     html = f"""
 <style>
@@ -61,7 +60,7 @@ h3.post-title.entry-title{{
 text-align:center !important;
 margin-top:10px !important;
 margin-bottom:20px !important;
-font-family:Arial, sans-serif !important;
+font-family:sans-serif !important;
 font-size:28px !important;
 font-weight:bold !important;
 text-transform:uppercase !important;
@@ -82,21 +81,20 @@ color:rgb(10,80,140) !important;
 .post-container {{
 max-width:900px;
 margin:auto;
-font-family:Arial, sans-serif !important;
+font-family:sans-serif !important;
 }}
 
 .post-img {{
-width:100% !important;
-max-width:100% !important;
-height:auto !important;
-aspect-ratio:16/9 !important;
-object-fit:cover !important;
+width:100%;
+height:auto;
+aspect-ratio:16/9;
+object-fit:cover;
 border-radius:8px !important;
 }}
 
-.sub {{
+.subtitulo {{
 text-align:left !important;
-font-family:Arial, sans-serif !important;
+font-family:sans-serif !important;
 color:{COR_MD} !important;
 font-size:20px !important;
 font-weight:bold !important;
@@ -105,20 +103,30 @@ margin-top:25px !important;
 margin-bottom:10px !important;
 }}
 
+.paragrafo {{
+text-align:justify !important;
+font-family:sans-serif !important;
+color:{COR_MD} !important;
+font-size:18px !important;
+line-height:1.6 !important;
+margin-bottom:15px !important;
+}}
+
 </style>
 
 <div class="post-container">
 
 <div style="text-align:center; margin-bottom:25px;">
-<img src="{imagem}" alt="{t}" class="post-img">
+<img src="{imagem}" alt="{titulo}" class="post-img">
 </div>
 
 <div class="conteudo-post">
-{conteudo}
+{conteudo_formatado}
 </div>
 
-{ass}
+{assinatura}
 
 </div>
 """
+
     return html
