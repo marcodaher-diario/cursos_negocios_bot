@@ -44,19 +44,15 @@ def formatar_conteudo_otimizado(texto_bruto, titulo_principal):
     return "\n".join(html_final)
 
 def obter_esqueleto_html(dados):
-    # Pega os dados e limpa
     t = dados.get("titulo", "").strip()
-    img = dados.get("imagem", "").strip()
+    imagem = dados.get("imagem", "").strip()
     txt = dados.get("texto_completo", "")
     ass = dados.get("assinatura", "")
     
     COR_MD = "rgb(7,55,99)"
     conteudo = formatar_conteudo_otimizado(txt, t)
 
-    # Estilo concentrado no topo: o Blogger lê uma vez e aplica a tudo
-    
     html = f"""
-
 <style>
 
 .post-title,
@@ -98,7 +94,7 @@ object-fit:cover !important;
 border-radius:8px !important;
 }}
 
-.subtitulo {{
+.sub {{
 text-align:left !important;
 font-family:Arial, sans-serif !important;
 color:{COR_MD} !important;
@@ -109,19 +105,20 @@ margin-top:25px !important;
 margin-bottom:10px !important;
 }}
 
+</style>
+
 <div class="post-container">
 
 <div style="text-align:center; margin-bottom:25px;">
-<img src="{imagem}" alt="{titulo}" class="post-img">
+<img src="{imagem}" alt="{t}" class="post-img">
 </div>
 
 <div class="conteudo-post">
-{conteudo_formatado}
+{conteudo}
 </div>
 
-{assinatura}
+{ass}
 
 </div>
-
-    return html
 """
+    return html
