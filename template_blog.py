@@ -54,7 +54,8 @@ def obter_esqueleto_html(dados):
     conteudo = formatar_conteudo_otimizado(txt, t)
 
     # Estilo concentrado no topo: o Blogger lê uma vez e aplica a tudo
-    return f"""
+    
+    html = f"""
 
 <style>
 
@@ -107,4 +108,20 @@ text-transform:uppercase !important;
 margin-top:25px !important;
 margin-bottom:10px !important;
 }}
+
+<div class="post-container">
+
+<div style="text-align:center; margin-bottom:25px;">
+<img src="{imagem}" alt="{titulo}" class="post-img">
+</div>
+
+<div class="conteudo-post">
+{conteudo_formatado}
+</div>
+
+{assinatura}
+
+</div>
+
+    return html
 """
