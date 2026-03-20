@@ -48,3 +48,4 @@
 2026-03-19|negocios|https://images.pexels.com/photos/7279706/pexels-photo-7279706.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-19|negocios|https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-19|oportunidades|https://images.pexels.com/photos/7078661/pexels-photo-7078661.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-03-20|negocios|https://images.pexels.com/photos/7681762/pexels-photo-7681762.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
