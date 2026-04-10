@@ -67,3 +67,4 @@
 2026-04-06|negocios|https://images.pexels.com/photos/5511124/pexels-photo-5511124.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-04-06|oportunidades|https://images.pexels.com/photos/7865064/pexels-photo-7865064.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-04-09|oportunidades|https://images.pexels.com/photos/9908661/pexels-photo-9908661.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-04-10|negocios|https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
