@@ -89,3 +89,4 @@
 2026-05-07|oportunidades|https://images.pexels.com/photos/16461434/pexels-photo-16461434.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-05-10|oportunidades|https://images.pexels.com/photos/35336001/pexels-photo-35336001.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-05-11|oportunidades|https://images.pexels.com/photos/4534504/pexels-photo-4534504.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-05-14|oportunidades|https://images.pexels.com/photos/5684450/pexels-photo-5684450.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
