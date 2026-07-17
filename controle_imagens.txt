@@ -115,3 +115,4 @@
 2026-07-13|oportunidades|https://images.pexels.com/photos/27141311/pexels-photo-27141311.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-07-15|negocios|https://images.pexels.com/photos/15505438/pexels-photo-15505438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-07-16|oportunidades|https://images.pexels.com/photos/8154767/pexels-photo-8154767.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-07-17|negocios|https://images.pexels.com/photos/7661590/pexels-photo-7661590.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
