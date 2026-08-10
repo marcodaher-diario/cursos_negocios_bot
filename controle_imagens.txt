@@ -128,3 +128,4 @@
 2026-08-08|cursos|https://images.pexels.com/photos/17713789/pexels-photo-17713789.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-08-09|oportunidades|https://images.pexels.com/photos/11391951/pexels-photo-11391951.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-08-10|negocios|https://images.pexels.com/photos/7971364/pexels-photo-7971364.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-08-10|oportunidades|https://images.pexels.com/photos/7691759/pexels-photo-7691759.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
