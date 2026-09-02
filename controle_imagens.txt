@@ -9,3 +9,4 @@
 2026-03-01|cursos|https://images.pexels.com/photos/7550395/pexels-photo-7550395.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-03-01|cursos|https://images.pexels.com/photos/13035736/pexels-photo-13035736.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-09-02|cursos e capacitação|https://images.pexels.com/photos/7279706/pexels-photo-7279706.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-09-02|cursos e capacitação|https://images.pexels.com/photos/4968531/pexels-photo-4968531.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
