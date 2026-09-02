@@ -4,12 +4,14 @@ import os
 import re
 import random
 import feedparser
+from zoneinfo import ZoneInfo
 
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from email.utils import parsedate_to_datetime
+FUSO_BRASILIA = ZoneInfo("America/Sao_Paulo")
 
 # ==========================================================
 # IMPORTAÇÕES DAS CONFIGURAÇÕES
@@ -854,9 +856,7 @@ def buscar_noticia(categoria):
 
     noticias_validas = []
 
-    agora = datetime.now(
-    tz=BRASILIA
-    )
+    agora = datetime.now(FUSO_BRASILIA)
 
     categoria_normalizada = normalizar_texto(
         categoria
