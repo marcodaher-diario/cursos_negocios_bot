@@ -854,9 +854,7 @@ def buscar_noticia(categoria):
 
     noticias_validas = []
 
-    agora = datetime.now(
-        timezone=None
-    )
+    agora = datetime.now(BRASILIA)
 
     categoria_normalizada = normalizar_texto(
         categoria
