@@ -1,9 +1,16 @@
+# -*- coding: utf-8 -*-
+
 # ==========================================
 # CONFIGURAÇÕES GERAIS DO BLOG
 # ==========================================
 
 # Lembre-se de atualizar o BLOG_ID caso este seja um novo blog no Blogger
-BLOG_ID = "4291876780757321771" 
+BLOG_ID = "4291876780757321771"
+
+
+# ==========================================
+# FONTES RSS
+# ==========================================
 
 RSS_FEEDS = [
     "https://exame.com/pme/feed/",
@@ -20,123 +27,719 @@ RSS_FEEDS = [
     "https://news.google.com/rss/search?q=renda+extra+confiável+OR+trabalho+remoto&hl=pt-BR&gl=BR&ceid=BR:pt-419"
 ]
 
+
 # ==========================================
-# TEMAS PARA POSTAGEM CURSOS E NEGÓCIOS
+# CATEGORIAS EDITORIAIS
 # ==========================================
 
-# Foco em Cursos, E-books e Capacitação
+CATEGORIAS_EDITORIAIS = [
+
+    # Educação e carreira
+    "cursos e capacitação",
+    "profissões e carreira",
+    "trabalho remoto",
+
+    # Renda e empreendedorismo
+    "renda extra",
+    "empreendedorismo",
+    "negócios digitais",
+
+    # Marketing e vendas
+    "marketing digital",
+    "programas de afiliados",
+    "infoprodutos e produtos digitais",
+
+    # Comércio digital
+    "e-commerce",
+    "vendas online",
+
+    # Tecnologia
+    "inteligência artificial",
+    "produtividade",
+
+    # Gestão
+    "gestão de negócios",
+    "finanças para empreendedores",
+    "MEI e pequenos negócios",
+
+    # Oportunidades e inovação
+    "franquias e oportunidades",
+    "startups e inovação"
+]
+
+
+# ==========================================
+# PALAVRAS-CHAVE — CURSOS E CAPACITAÇÃO
+# ==========================================
+
 PALAVRAS_CURSOS_E_CONTEUDO = [
-    "curso", "treinamento", "capacitação", "e-book", "infoproduto", "mentoria", 
-    "workshop", "webinar", "aprendizado", "especialização", "aula", "gratuito", 
-    "certificado", "formação", "estudo", "plataforma", "didática", "educativo", 
-    "conhecimento", "habilidades", "venda de e-books", "produtor de conteúdo"
+    "curso",
+    "cursos",
+    "curso online",
+    "curso gratuito",
+    "curso grátis",
+    "curso profissionalizante",
+    "curso técnico",
+    "curso de capacitação",
+    "capacitação profissional",
+    "qualificação profissional",
+    "formação profissional",
+    "especialização",
+    "aperfeiçoamento",
+    "treinamento",
+    "mentoria",
+    "workshop",
+    "webinar",
+    "aula online",
+    "aulas gratuitas",
+    "e-book",
+    "ebook",
+    "infoproduto",
+    "certificado",
+    "certificação",
+    "bolsa de estudos",
+    "vagas para cursos",
+    "inscrições abertas",
+    "inscrição gratuita",
+    "educação profissional",
+    "educação online",
+    "ensino a distância",
+    "EAD",
+    "aprendizado",
+    "habilidades",
+    "novas habilidades",
+    "requalificação",
+    "qualificação",
+    "mercado de trabalho",
+    "profissão",
+    "nova profissão",
+    "profissões em alta",
+    "carreira",
+    "desenvolvimento profissional"
 ]
 
-# Foco em Negócios Digitais, Afiliados e Plataformas
+
+# ==========================================
+# PALAVRAS-CHAVE — NEGÓCIOS DIGITAIS
+# ==========================================
+
 PALAVRAS_NEGOCIOS_DIGITAIS = [
-    "Kiwify", "Hotmart", "Eduzz", "Monetizze", "afiliado", "marketing digital", 
-    "vendas online", "conversão", "copywriting", "tráfego pago", "tráfego orgânico", 
-    "lançamento", "funil de vendas", "estratégia", "autoridade", "branding", 
-    "Instagram", "Facebook", "TikTok", "anúncios", "gestão de tráfego", "ROI"
+    "negócio digital",
+    "negócios digitais",
+    "marketing digital",
+    "marketing de conteúdo",
+    "marketing de afiliados",
+    "afiliado",
+    "programa de afiliados",
+    "vendas online",
+    "vender pela internet",
+    "vendas pela internet",
+    "infoproduto",
+    "produto digital",
+    "e-book",
+    "venda de e-books",
+    "Hotmart",
+    "Kiwify",
+    "Eduzz",
+    "Monetizze",
+    "Braip",
+    "copywriting",
+    "copy",
+    "funil de vendas",
+    "funil de conversão",
+    "landing page",
+    "página de vendas",
+    "tráfego pago",
+    "tráfego orgânico",
+    "gestão de tráfego",
+    "anúncios online",
+    "Google Ads",
+    "Meta Ads",
+    "Instagram",
+    "Facebook",
+    "TikTok",
+    "YouTube",
+    "WhatsApp Business",
+    "SEO",
+    "posicionamento digital",
+    "branding",
+    "autoridade digital",
+    "conversão",
+    "taxa de conversão",
+    "ROI",
+    "automação",
+    "automação de marketing"
 ]
 
-# Foco em Empreendedorismo, Renda Extra e Oportunidades
-PALAVRAS_OPORTUNIDADES_E_RENDA = [
-    "empreendedorismo", "negócios em alta", "renda extra", "oportunidade", 
-    "investimento", "carreira", "trabalho remoto", "home office", "franquia", 
-    "MEI", "lucro", "escalabilidade", "monetização", "renda passiva", 
-    "finanças", "pme", "inovação", "startup", "mercado", "tendência"
+
+# ==========================================
+# PALAVRAS-CHAVE — RENDA EXTRA
+# ==========================================
+
+PALAVRAS_RENDA_EXTRA = [
+    "renda extra",
+    "renda extra online",
+    "renda extra em casa",
+    "renda extra pela internet",
+    "ganhar dinheiro",
+    "ganhar dinheiro online",
+    "ganhar dinheiro em casa",
+    "como ganhar dinheiro",
+    "formas de ganhar dinheiro",
+    "dinheiro extra",
+    "segunda renda",
+    "aumentar a renda",
+    "complementar a renda",
+    "renda complementar",
+    "renda passiva",
+    "renda recorrente",
+    "trabalho extra",
+    "trabalho em casa",
+    "trabalho pela internet",
+    "trabalho online",
+    "freelancer",
+    "freelance",
+    "prestação de serviços",
+    "serviços online",
+    "vendas online",
+    "vender produtos",
+    "vender pela internet",
+    "afiliado",
+    "marketing de afiliados",
+    "infoproduto",
+    "produto digital",
+    "criar e vender e-book",
+    "criar curso online",
+    "monetizar conteúdo",
+    "monetização",
+    "YouTube",
+    "blog",
+    "Instagram",
+    "TikTok",
+    "criação de conteúdo"
 ]
 
-# ==========================================================
-# RANKING ESTRATÉGICO DE PESOS 
-# ==========================================================
+
+# ==========================================
+# PALAVRAS-CHAVE — EMPREENDEDORISMO
+# ==========================================
+
+PALAVRAS_EMPREENDEDORISMO = [
+    "empreendedorismo",
+    "empreendedor",
+    "empreender",
+    "abrir empresa",
+    "abrir negócio",
+    "começar um negócio",
+    "montar um negócio",
+    "pequeno negócio",
+    "pequena empresa",
+    "microempresa",
+    "PME",
+    "pequenas empresas",
+    "negócio próprio",
+    "negócio lucrativo",
+    "ideias de negócios",
+    "ideias para empreender",
+    "negócios em alta",
+    "negócios promissores",
+    "modelo de negócio",
+    "plano de negócio",
+    "planejamento empresarial",
+    "gestão empresarial",
+    "gestão de negócios",
+    "gestão financeira",
+    "gestão de clientes",
+    "gestão de vendas",
+    "produtividade",
+    "escalabilidade",
+    "inovação",
+    "startup",
+    "franquia",
+    "microfranquia",
+    "MEI",
+    "microempreendedor individual",
+    "formalização",
+    "CNPJ",
+    "cliente",
+    "vendas",
+    "lucro",
+    "faturamento",
+    "custos",
+    "despesas",
+    "precificação"
+]
+
+
+# ==========================================
+# PALAVRAS-CHAVE — CARREIRA E TRABALHO
+# ==========================================
+
+PALAVRAS_CARREIRA_TRABALHO = [
+    "trabalho remoto",
+    "trabalhar remotamente",
+    "home office",
+    "trabalho em casa",
+    "emprego remoto",
+    "vaga remota",
+    "vagas remotas",
+    "vagas de emprego",
+    "empregos",
+    "oportunidades de trabalho",
+    "carreira",
+    "planejamento de carreira",
+    "mudança de carreira",
+    "transição de carreira",
+    "recolocação profissional",
+    "empregabilidade",
+    "profissões",
+    "profissões em alta",
+    "profissões do futuro",
+    "profissões mais procuradas",
+    "habilidades profissionais",
+    "qualificação profissional",
+    "currículo",
+    "entrevista de emprego",
+    "LinkedIn",
+    "freelancer",
+    "freelance",
+    "prestador de serviços",
+    "trabalho autônomo",
+    "trabalhador autônomo"
+]
+
+
+# ==========================================
+# PALAVRAS-CHAVE — E-COMMERCE
+# ==========================================
+
+PALAVRAS_ECOMMERCE = [
+    "e-commerce",
+    "ecommerce",
+    "comércio eletrônico",
+    "loja virtual",
+    "loja online",
+    "vender online",
+    "vendas online",
+    "vender pela internet",
+    "marketplace",
+    "marketplaces",
+    "Mercado Livre",
+    "Amazon",
+    "Shopee",
+    "Magalu",
+    "Shopify",
+    "Nuvemshop",
+    "WooCommerce",
+    "produto",
+    "catálogo online",
+    "checkout",
+    "carrinho de compras",
+    "conversão",
+    "logística",
+    "frete",
+    "entrega",
+    "dropshipping",
+    "social commerce",
+    "comércio digital",
+    "pagamento online",
+    "meios de pagamento",
+    "cliente online",
+    "experiência do cliente",
+    "avaliações",
+    "reputação",
+    "fidelização"
+]
+
+
+# ==========================================
+# PALAVRAS-CHAVE — FINANÇAS PARA NEGÓCIOS
+# ==========================================
+
+PALAVRAS_FINANCAS_NEGOCIOS = [
+    "finanças",
+    "finanças pessoais",
+    "finanças empresariais",
+    "educação financeira",
+    "educação financeira para empreendedores",
+    "fluxo de caixa",
+    "capital de giro",
+    "faturamento",
+    "lucro",
+    "margem de lucro",
+    "margem de contribuição",
+    "custos",
+    "despesas",
+    "precificação",
+    "preço de venda",
+    "formação de preço",
+    "controle financeiro",
+    "planejamento financeiro",
+    "investimento",
+    "investir no negócio",
+    "retorno sobre investimento",
+    "ROI",
+    "endividamento",
+    "crédito",
+    "empréstimo empresarial",
+    "capital",
+    "MEI",
+    "impostos",
+    "tributação",
+    "nota fiscal",
+    "CNPJ",
+    "contabilidade",
+    "conta empresarial"
+]
+
+
+# ==========================================
+# PALAVRAS-CHAVE — INTELIGÊNCIA ARTIFICIAL
+# ==========================================
+
+PALAVRAS_IA_NEGOCIOS = [
+    "inteligência artificial",
+    "IA",
+    "IA generativa",
+    "ChatGPT",
+    "Gemini",
+    "Claude",
+    "Copilot",
+    "automação com IA",
+    "IA para empresas",
+    "IA para negócios",
+    "IA para marketing",
+    "IA para vendas",
+    "IA para empreendedores",
+    "IA para pequenos negócios",
+    "IA para produtividade",
+    "ferramentas de IA",
+    "ferramentas de inteligência artificial",
+    "automação",
+    "automação de tarefas",
+    "automação de marketing",
+    "automação de vendas",
+    "chatbot",
+    "assistente virtual",
+    "criação de conteúdo com IA",
+    "texto com IA",
+    "imagem com IA",
+    "vídeo com IA",
+    "produtividade com IA"
+]
+
+
+# ==========================================
+# TIPOS DE CONTEÚDO
+# ==========================================
+
+TIPOS_DE_CONTEUDO = [
+    "guia completo",
+    "passo a passo",
+    "lista de opções",
+    "comparativo",
+    "tutorial",
+    "erros comuns",
+    "dicas práticas",
+    "oportunidades",
+    "novidades",
+    "tendências",
+    "ferramentas",
+    "ferramentas gratuitas",
+    "estratégias",
+    "como começar",
+    "como fazer",
+    "vale a pena",
+    "vantagens e desvantagens",
+    "mitos e verdades",
+    "casos práticos",
+    "checklist"
+]
+
+
+# ==========================================
+# PÚBLICOS-ALVO
+# ==========================================
+
+PUBLICOS_ALVO = [
+    "iniciantes",
+    "quem está desempregado",
+    "quem busca renda extra",
+    "quem quer trabalhar de casa",
+    "MEIs",
+    "pequenos empreendedores",
+    "autônomos",
+    "freelancers",
+    "criadores de conteúdo",
+    "afiliados",
+    "produtores de conteúdo",
+    "profissionais em transição de carreira",
+    "quem quer abrir o primeiro negócio",
+    "quem quer vender pela internet"
+]
+
+
+# ==========================================
+# RANKING ESTRATÉGICO DE PESOS
+# ==========================================
+
 PESOS_POR_TEMA = {
+
     "cursos": {
-        "curso": 15, "gratuito": 12, "vagas": 10, "e-book": 12, "inscrição": 9,
-        "especialização": 10, "treinamento": 9, "mentoria": 11, "certificado": 10
+        "curso gratuito": 15,
+        "curso online": 14,
+        "curso profissionalizante": 14,
+        "certificado": 12,
+        "bolsa de estudos": 13,
+        "capacitação": 11,
+        "qualificação profissional": 12,
+        "inscrições abertas": 14,
+        "profissão": 9,
+        "carreira": 9
     },
-    "negocios": {
-        "kiwify": 15, "hotmart": 15, "monetizze": 15, "eduzz": 15, "braip": 15,
-        "marketing digital": 13, "afiliado": 12, "vendas": 10, "estratégia": 9, 
-        "lucro": 10, "copywriting": 11
+
+    "renda_extra": {
+        "renda extra": 15,
+        "ganhar dinheiro": 14,
+        "ganhar dinheiro online": 15,
+        "trabalho em casa": 13,
+        "trabalho remoto": 13,
+        "afiliado": 14,
+        "vendas online": 12,
+        "freelancer": 12,
+        "segunda renda": 14,
+        "renda complementar": 13
     },
-    "oportunidades": {
-        "renda extra": 15, "home office": 12, "trabalho remoto": 12, "trabalho em casa": 11, 
-        "mei": 10, "franquia": 11, "investimento": 9, "startup": 10, "carreira": 9, "pme": 8
+
+    "negocios_digitais": {
+        "marketing digital": 15,
+        "afiliado": 14,
+        "vendas online": 13,
+        "infoproduto": 14,
+        "Hotmart": 12,
+        "Kiwify": 12,
+        "copywriting": 12,
+        "tráfego pago": 13,
+        "SEO": 12,
+        "funil de vendas": 11,
+        "automação": 11
+    },
+
+    "empreendedorismo": {
+        "empreendedorismo": 15,
+        "abrir negócio": 14,
+        "negócio próprio": 14,
+        "ideias de negócios": 14,
+        "negócios em alta": 15,
+        "pequeno negócio": 13,
+        "MEI": 12,
+        "franquia": 12,
+        "startup": 10,
+        "inovação": 10
+    },
+
+    "carreira": {
+        "trabalho remoto": 15,
+        "home office": 14,
+        "vaga remota": 15,
+        "emprego": 11,
+        "carreira": 12,
+        "profissões em alta": 15,
+        "qualificação profissional": 13,
+        "recolocação profissional": 12,
+        "freelancer": 11
+    },
+
+    "ecommerce": {
+        "e-commerce": 15,
+        "loja virtual": 15,
+        "vendas online": 13,
+        "marketplace": 13,
+        "Mercado Livre": 12,
+        "Shopee": 12,
+        "Amazon": 11,
+        "Shopify": 11,
+        "Nuvemshop": 11,
+        "dropshipping": 10
+    },
+
+    "inteligencia_artificial": {
+        "inteligência artificial": 15,
+        "IA para negócios": 15,
+        "IA para empresas": 14,
+        "IA para pequenos negócios": 15,
+        "ChatGPT": 13,
+        "Gemini": 12,
+        "ferramentas de IA": 14,
+        "automação com IA": 15,
+        "IA para marketing": 14,
+        "IA para vendas": 14,
+        "produtividade com IA": 13
+    },
+
+    "financas": {
+        "fluxo de caixa": 14,
+        "capital de giro": 13,
+        "lucro": 12,
+        "faturamento": 11,
+        "precificação": 14,
+        "margem de lucro": 14,
+        "controle financeiro": 13,
+        "planejamento financeiro": 12,
+        "MEI": 11,
+        "ROI": 10
     }
 }
 
+
 # ==========================================
-# BLOCO FIXO FINAL -  ASSINATURA
+# LIMITES DE REPETIÇÃO POR CLUSTER
 # ==========================================
+
+LIMITES_CLUSTER = {
+    "cursos": 3,
+    "renda_extra": 3,
+    "negocios_digitais": 3,
+    "empreendedorismo": 3,
+    "carreira": 2,
+    "ecommerce": 2,
+    "inteligencia_artificial": 3,
+    "financas": 2
+}
+
+
+# ==========================================
+# CONFIGURAÇÃO DE CONTROLE
+# ==========================================
+
+ARQUIVO_CONTROLE_AGENDAMENTO = "controle_agendamentos.txt"
+
+ARQUIVO_CONTROLE_TEMAS = "controle_temas_usados.txt"
+
+ARQUIVO_CONTROLE_IMAGENS = "controle_imagens.txt"
+
+# Quantos dias um tema fica bloqueado contra repetição
+DIAS_BLOQUEIO_TEMA = 20
+
+# Quantos dias uma imagem fica bloqueada contra repetição
+DIAS_BLOQUEIO_IMAGEM = 30
+
+
+# ==========================================
+# CONFIGURAÇÃO DO GEMINI
+# ==========================================
+
+MODELO_GEMINI = "gemini-3-flash-preview"
+
+
+# ==========================================
+# PARÂMETROS DE REDAÇÃO
+# ==========================================
+
+MIN_PALAVRAS = 600
+
+MAX_PALAVRAS = 800
+
+
+# ==========================================
+# REGRAS EDITORIAIS
+# ==========================================
+
+REGRAS_EDITORIAIS = [
+
+    "Escrever em português do Brasil.",
+    
+    "Usar linguagem clara, simples, natural e fácil de entender.",
+    
+    "Priorizar conteúdo útil e prático para o leitor.",
+    
+    "Evitar textos genéricos ou excessivamente superficiais.",
+    
+    "Evitar repetir assuntos publicados recentemente.",
+    
+    "Evitar títulos praticamente iguais aos já utilizados.",
+    
+    "Não prometer ganhos financeiros garantidos.",
+    
+    "Não apresentar renda extra como dinheiro fácil ou enriquecimento rápido.",
+    
+    "Quando falar de renda, negócios ou investimentos, apresentar custos, riscos, limitações ou requisitos quando forem relevantes.",
+    
+    "Priorizar oportunidades legítimas e verificáveis.",
+    
+    "Evitar afirmações absolutas quando houver variáveis envolvidas.",
+    
+    "Quando uma informação depender de data, preço, regra, programa ou condição específica, deixar claro que ela pode mudar.",
+    
+    "Usar subtítulos para facilitar a leitura.",
+    
+    "Usar listas e tópicos quando isso melhorar a compreensão.",
+    
+    "Sempre que possível, apresentar exemplos práticos.",
+    
+    "O título deve despertar interesse sem utilizar clickbait enganoso.",
+    
+    "O título deve refletir exatamente o conteúdo do artigo.",
+    
+    "Priorizar palavras-chave relevantes no título de forma natural.",
+    
+    "Não exagerar na repetição de palavras-chave.",
+    
+    "Não escrever para mecanismos de busca sacrificando a experiência do leitor."
+]
+
+
+# ==========================================
+# CONFIGURAÇÃO DE VARIEDADE DE CONTEÚDO
+# ==========================================
+
+# Evita que o robô escolha sempre o mesmo formato
+USAR_TIPO_DE_CONTEUDO = True
+
+# Permite combinar categoria + público + formato
+USAR_PUBLICO_ALVO = True
+
+# Permite priorizar assuntos encontrados nos RSS
+PRIORIZAR_TENDENCIAS_RSS = True
+
+# Permite utilizar palavras-chave estratégicas na criação dos temas
+USAR_PESOS_SEO = True
+
+# Evita concentração excessiva em um único cluster
+USAR_LIMITES_CLUSTER = True
+
+
+# ==========================================
+# CONFIGURAÇÃO DE TÍTULOS
+# ==========================================
+
+MIN_CARACTERES_TITULO = 45
+
+MAX_CARACTERES_TITULO = 75
+
+# Evita títulos excessivamente sensacionalistas
+EVITAR_CLICKBAIT = True
+
+
+# ==========================================
+# CONFIGURAÇÃO DE SEO
+# ==========================================
+
+# Número máximo de tags do Blogger
+MAX_TAGS = 15
+
+# Tamanho máximo total das tags
+MAX_CARACTERES_TAGS = 200
+
+
+# ==========================================
+# BLOCO FIXO FINAL
+# ==========================================
+
+# Este bloco pode ser utilizado pelo template_blog.py
+# para inserir uma assinatura, aviso ou chamada fixa
+# no final dos artigos.
 
 BLOCO_FIXO_FINAL = """
-<div class="footer-marco-daher" style="background-color: #e1f5fe; border-radius: 15px; border: 1px solid rgb(179, 229, 252); color: #073763; font-family: Arial, Helvetica, sans-serif; line-height: 1.4; margin-top: 10px; padding: 25px; text-align: center;">
-  
-  <p style="font-size: x-small; font-weight: bold; margin-top: 0px; text-align: right;">
-    <i>Por: Marco Daher<br />Todos os Direitos Reservados<br />©MarcoDaher2026</i>
-  </p>
-
-  <div class="separator" style="clear: both; margin: 15px 0px; text-align: center;">
-    <a href="https://s.shopee.com.br/9zs5JZLPNm" target="_blank">
-      <img border="0" height="132" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHYBTRiztv4UNKBsiwX8nQn1M00BUz-LtO58gTZ6hEsU3VPClePhQwPWw0NyUJGqXvm3vWbRPP6LPQS6m5iyI0UQBBKmdIkNYNuXmGaxv5eMac9R6i2e9MIU7_YmWeMKntQ1ZWlzplYlDYNJr5lGHiUvwJ1CuvQOLzbOT61kF3LQ0-nD4j3Xo4HJWeOG4/w640-h132/Banner%20Shopee%20Rodap%C3%A9.gif" style="height: auto; max-width: 100%;" width="640" />
-    </a>
-  </div>
-
-  <div style="margin-bottom: 20px; text-align: center;">
-    <p style="font-weight: bold; margin-bottom: 10px; text-align: center;">🚀 Gostou deste conteúdo? Não guarde só para você!</p>
-    <a href="https://api.whatsapp.com/send?text=Confira este artigo incrível no blog do Marco Daher!" style="background-color: #25d366; border-radius: 5px; color: white; display: inline-block; font-weight: bold; padding: 10px 20px; text-decoration: none;" target="_blank">
-        Compartilhar no WhatsApp
-    </a>
-  </div>
-
-  <p style="font-size: 16px; font-weight: bold; margin-bottom: 20px; text-align: center;">
-    O conhecimento é o combustível para o Sucesso. Não pesa e não ocupa espaço.
-  </p>
-
-  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 20px 0px;">
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Zona do Saber</div>
-      <a href="http://zonadosaber1.blogspot.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/blogger.png" style="height: 32px; width: 32px;" title="Blogger" /></a>&nbsp;<a href="https://www.youtube.com/@ZonadoSaber51" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" title="YouTube" /></a>&nbsp;<a href="https://www.facebook.com/profile.php?id=61558194825166" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="height: 32px; width: 32px;" title="Facebook" /></a>
-    </div>
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">MD Arte Foto</div>
-      <a href="https://mdartefoto.blogspot.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/blogger.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.facebook.com/mdaher51/" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="height: 32px; width: 32px;" /></a>
-    </div>
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">DF Bolhas</div>
-      <a href="https://dfbolhas.blogspot.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/blogger.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.youtube.com/marcodaher51" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.facebook.com/mdaher51/" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="height: 32px; width: 32px;" /></a>
-    </div>
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Marco Daher</div>
-      <a href="https://www.youtube.com/@MarcoDaher" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.facebook.com/MarcoDaher51/" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="height: 32px; width: 32px;" /></a>
-    </div>
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Diário de Notícias</div>
-      <a href="https://diariodenoticias-md.blogspot.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/blogger.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.youtube.com/@DiariodeNoticiasBrazuca" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" /></a>
-    </div>
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Emagrecer com Saúde</div>
-      <a href="https://emagrecendo100crise.blogspot.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/blogger.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.youtube.com/@Saude-Bem-Estar-51" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.facebook.com/marcocuidese" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="height: 32px; width: 32px;" title="Facebook" /></a>
-    </div>
-    <div style="border-right: 1px solid rgba(7, 55, 99, 0.2); min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Relaxamento</div>
-      <a href="https://www.youtube.com/channel/UCRNq9fN3jzLt0JeE5yBsqQQ" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" /></a>
-    </div>
-    <div style="min-width: 120px; padding: 10px;">
-      <div style="color: #b45f06; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Cursos e Negócios</div>
-      <a href="https://cursosnegocioseoportunidades.blogspot.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/blogger.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.youtube.com/@CursoseNegociosMD" target="_blank"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" style="height: 32px; width: 32px;" /></a>&nbsp;<a href="https://www.facebook.com/CursosNegociosOportunidades" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="height: 32px; width: 32px;" /></a>
-    </div>
-  </div>
-<hr style="border-bottom: 0px; border-image: initial; border-left: 0px; border-right: 0px; border-top: 1px solid rgba(7, 55, 99, 0.133); border: 0px; margin: 20px 0px;" />
-  <p style="font-size: 14px; font-weight: bold; margin-bottom: 10px;">
-    Caso queira contribuir com o meu Trabalho, use a CHAVE PIX abaixo:
-  </p>
-  <button onclick="navigator.clipboard.writeText('marco.caixa104@gmail.com'); alert('Chave PIX copiada!');" style="background-color: #0288d1; border-color: initial; border-radius: 8px; border-style: none; border-width: initial; box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px; color: white; cursor: pointer; font-size: 14px; font-weight: bold; padding: 12px 20px; transition: 0.3s;">
-    Copiar Chave PIX: marco.caixa104@gmail.com
-  </button>
-</div>
-<hr data-end="883" data-start="880" style="text-align: justify;" />
-<h2 data-end="913" data-start="885" style="text-align: justify;"><br /></h2>
+<p><strong>Gostou do conteúdo?</strong> Continue acompanhando o blog para encontrar mais dicas, oportunidades, cursos, ferramentas e informações para ajudar você a desenvolver sua carreira, aumentar sua renda e melhorar seus negócios.</p>
 """
