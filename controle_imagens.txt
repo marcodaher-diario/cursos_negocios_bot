@@ -13,3 +13,4 @@
 2026-09-02|negócios digitais|https://images.pexels.com/photos/577195/pexels-photo-577195.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-09-04|negócios digitais|https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
 2026-10-11|cursos e capacitação|https://images.pexels.com/photos/15505438/pexels-photo-15505438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+2026-10-11|negócios digitais|https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
