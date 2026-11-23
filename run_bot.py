@@ -90,7 +90,7 @@ try:
         os.getenv("JANELA_POSTAGEM_MINUTOS", "90")
     )
 except ValueError:
-    JANELA_MINUTOS = 90
+    JANELA_MINUTOS = 60
 
 
 # ==========================================================
